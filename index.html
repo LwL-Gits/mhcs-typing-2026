@@ -6,217 +6,259 @@
 <title>MHCS 中文打字競賽 2026 | Mandarin Typing Contest</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg-primary: #ffffff; --bg-secondary: #f5f5f0; --bg-tertiary: #eeede8;
-  --text-primary: #1a1a1a; --text-secondary: #666660; --text-tertiary: #999993;
-  --border: 0.5px solid rgba(0,0,0,0.12); --border-hover: 0.5px solid rgba(0,0,0,0.25);
-  --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px;
-  --ink: #1a1a2e; --jade: #0f6e56; --jade-light: #e1f5ee;
-  --sky: #185fa5; --sky-light: #e6f1fb; --gold: #b7860b; --gold-light: #fef9e7;
-  --red: #c0392b; --red-light: #fadbd8;
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-primary:#ffffff;--bg-secondary:#f5f5f0;--bg-tertiary:#eeede8;
+  --text-primary:#1a1a1a;--text-secondary:#666660;--text-tertiary:#999993;
+  --border:0.5px solid rgba(0,0,0,0.12);
+  --radius-md:8px;--radius-lg:12px;
+  --ink:#1a1a2e;--jade:#0f6e56;--sky:#185fa5;--gold:#b7860b;--red:#c0392b;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #1e1e1e; --bg-secondary: #2a2a2a; --bg-tertiary: #242424;
-    --text-primary: #f0f0ec; --text-secondary: #aaa; --text-tertiary: #777;
-    --border: 0.5px solid rgba(255,255,255,0.12); --border-hover: 0.5px solid rgba(255,255,255,0.25);
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg-primary:#1e1e1e;--bg-secondary:#2a2a2a;--bg-tertiary:#242424;
+    --text-primary:#f0f0ec;--text-secondary:#aaa;--text-tertiary:#777;
+    --border:0.5px solid rgba(255,255,255,0.12);
   }
 }
-body { font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Apple LiGothic', sans-serif; background: var(--bg-tertiary); min-height: 100vh; color: var(--text-primary); }
+body{font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Apple LiGothic',sans-serif;background:var(--bg-tertiary);min-height:100vh;color:var(--text-primary)}
 
-/* ── LOGIN ── */
-#login-screen { min-height: 100vh; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); display: flex; align-items: center; justify-content: center; padding: 2rem; }
-.login-card { background: var(--bg-primary); border-radius: 16px; padding: 2.5rem; max-width: 440px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
-.login-header { text-align: center; margin-bottom: 1.75rem; }
-.login-logo { font-size: 2.5rem; margin-bottom: 0.4rem; }
-.login-title { font-size: 1.4rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.2rem; }
-.login-subtitle { font-size: 0.85rem; color: #888; }
-.login-dates { background: #fef9e7; border: 1px solid #f0d060; border-radius: 8px; padding: 0.55rem 1rem; text-align: center; margin-bottom: 1.5rem; font-size: 0.8rem; color: #7a5c00; }
-.form-group { margin-bottom: 1rem; }
-.form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: #444; margin-bottom: 0.4rem; }
-.form-group input { width: 100%; padding: 0.7rem 1rem; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; font-family: inherit; background: white; color: #1a1a1a; transition: border-color 0.2s; }
-.form-group input:focus { outline: none; border-color: #185fa5; box-shadow: 0 0 0 3px rgba(24,95,165,0.1); }
-.btn-login { width: 100%; padding: 0.85rem; background: #1a1a2e; color: white; border: none; border-radius: 8px; font-size: 1rem; font-family: inherit; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; }
-.btn-login:hover { background: #2d2d4e; }
-.btn-login:active { transform: scale(0.99); }
-.login-error { color: #c0392b; font-size: 0.85rem; text-align: center; margin-top: 0.6rem; display: none; }
-.admin-toggle { text-align: center; margin-top: 1rem; font-size: 0.8rem; color: #185fa5; cursor: pointer; }
-.admin-toggle:hover { text-decoration: underline; }
+/* LOGIN */
+#login-screen{min-height:100vh;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-card{background:var(--bg-primary);border-radius:16px;padding:2.5rem;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.4)}
+.login-header{text-align:center;margin-bottom:1.75rem}
+.login-logo{font-size:2.5rem;margin-bottom:0.4rem}
+.login-title{font-size:1.4rem;font-weight:700;color:#1a1a2e;margin-bottom:0.2rem}
+.login-subtitle{font-size:0.85rem;color:#888}
+.login-dates{background:#fef9e7;border:1px solid #f0d060;border-radius:8px;padding:0.55rem 1rem;text-align:center;margin-bottom:1.5rem;font-size:0.8rem;color:#7a5c00}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:0.8rem;font-weight:600;color:#444;margin-bottom:0.4rem}
+.form-group input{width:100%;padding:0.7rem 1rem;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;font-family:inherit;background:white;color:#1a1a1a;transition:border-color 0.2s}
+.form-group input:focus{outline:none;border-color:#185fa5;box-shadow:0 0 0 3px rgba(24,95,165,0.1)}
+.btn-login{width:100%;padding:0.85rem;background:#1a1a2e;color:white;border:none;border-radius:8px;font-size:1rem;font-family:inherit;font-weight:600;cursor:pointer;transition:background 0.2s}
+.btn-login:hover{background:#2d2d4e}
+.login-error{color:#c0392b;font-size:0.85rem;text-align:center;margin-top:0.6rem;display:none}
+.admin-toggle{text-align:center;margin-top:1rem;font-size:0.8rem;color:#185fa5;cursor:pointer}
+.admin-toggle:hover{text-decoration:underline}
 
-/* ── TOP NAV ── */
-#main-app { display: none; min-height: 100vh; }
-.top-nav { background: #1a1a2e; color: white; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
-.nav-brand { display: flex; align-items: center; gap: 0.75rem; }
-.nav-brand-logo { font-size: 1.4rem; }
-.nav-brand-text { font-size: 0.9rem; font-weight: 600; }
-.nav-brand-sub { font-size: 0.68rem; opacity: 0.55; }
-.nav-right { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
-.nav-timer { font-size: 0.72rem; background: rgba(255,255,255,0.1); padding: 0.28rem 0.7rem; border-radius: 20px; white-space: nowrap; }
-.nav-avatar { width: 32px; height: 32px; border-radius: 50%; background: #185fa5; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; }
-.btn-logout { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 0.28rem 0.7rem; border-radius: 6px; font-size: 0.78rem; cursor: pointer; font-family: inherit; transition: background 0.15s; }
-.btn-logout:hover { background: rgba(255,255,255,0.2); }
-.contest-status { display: flex; align-items: center; gap: 0.4rem; padding: 0.28rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
-.status-active { background: #e1f5ee; color: #0f6e56; }
-.status-upcoming { background: #fef9e7; color: #7a5c00; }
-.status-ended { background: #fadbd8; color: #822620; }
-.status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
-.status-dot.pulse { animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.6)} }
+/* SYNC BANNER */
+.sync-bar{background:#1a1a2e;color:rgba(255,255,255,0.75);font-size:0.72rem;text-align:center;padding:0.22rem 1rem;display:flex;align-items:center;justify-content:center;gap:0.5rem}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:#4caf50;flex-shrink:0}
+.sync-dot.syncing{background:#f0d060;animation:blink 0.8s infinite}
+.sync-dot.error{background:#e57373}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 
-/* ── LAYOUT ── */
-.main-layout { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 56px); }
-.sidebar { background: var(--bg-primary); border-right: var(--border); padding: 1.5rem 0; position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; }
-.sidebar-section { margin-bottom: 1.5rem; }
-.sidebar-label { font-size: 0.68rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.09em; padding: 0 1.25rem; margin-bottom: 0.4rem; }
-.sidebar-item { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 1.25rem; font-size: 0.875rem; cursor: pointer; color: var(--text-secondary); border-left: 3px solid transparent; transition: all 0.15s; }
-.sidebar-item:hover { background: var(--bg-secondary); color: var(--text-primary); }
-.sidebar-item.active { background: #e6f1fb; color: #185fa5; border-left-color: #185fa5; font-weight: 600; }
-.sidebar-item i { font-size: 16px; flex-shrink: 0; }
-.sidebar-user { padding: 0 1.25rem; }
-.sidebar-user-name { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); }
-.sidebar-user-id { font-size: 0.72rem; color: var(--text-secondary); font-family: 'Courier New', monospace; margin-top: 2px; word-break: break-all; }
-.badge-level { display: inline-block; padding: 0.15rem 0.55rem; border-radius: 10px; font-size: 0.7rem; font-weight: 700; margin-top: 4px; }
-.badge-L9 { background: #EEEDFE; color: #3C3489; }
-.badge-L6 { background: #e1f5ee; color: #085041; }
-.badge-L5 { background: #faeeda; color: #633806; }
-.badge-admin { background: #fef9e7; color: #7a5c00; border: 1px solid #f0d060; }
+/* TOP NAV */
+#main-app{display:none;min-height:100vh}
+.top-nav{background:#1a1a2e;color:white;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.4)}
+.nav-brand{display:flex;align-items:center;gap:0.75rem}
+.nav-brand-logo{font-size:1.4rem}
+.nav-brand-text{font-size:0.9rem;font-weight:600}
+.nav-brand-sub{font-size:0.68rem;opacity:0.55}
+.nav-right{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap}
+.nav-timer{font-size:0.72rem;background:rgba(255,255,255,0.1);padding:0.28rem 0.7rem;border-radius:20px;white-space:nowrap}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:#185fa5;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;flex-shrink:0}
+.btn-logout{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;padding:0.28rem 0.7rem;border-radius:6px;font-size:0.78rem;cursor:pointer;font-family:inherit;transition:background 0.15s}
+.btn-logout:hover{background:rgba(255,255,255,0.2)}
+.contest-status{display:flex;align-items:center;gap:0.4rem;padding:0.28rem 0.75rem;border-radius:20px;font-size:0.75rem;font-weight:600;white-space:nowrap}
+.status-active{background:#e1f5ee;color:#0f6e56}
+.status-upcoming{background:#fef9e7;color:#7a5c00}
+.status-ended{background:#fadbd8;color:#822620}
+.status-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.status-dot.pulse{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.6)}}
 
-/* ── CONTENT ── */
-.content { background: var(--bg-tertiary); padding: 2rem; overflow-y: auto; }
-.panel { display: none; }
-.panel.active { display: block; }
-.panel-title { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.2rem; }
-.panel-sub { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+/* LAYOUT */
+.main-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 56px)}
+.sidebar{background:var(--bg-primary);border-right:var(--border);padding:1.5rem 0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto}
+.sidebar-section{margin-bottom:1.5rem}
+.sidebar-label{font-size:0.68rem;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.09em;padding:0 1.25rem;margin-bottom:0.4rem}
+.sidebar-item{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 1.25rem;font-size:0.875rem;cursor:pointer;color:var(--text-secondary);border-left:3px solid transparent;transition:all 0.15s}
+.sidebar-item:hover{background:var(--bg-secondary);color:var(--text-primary)}
+.sidebar-item.active{background:#e6f1fb;color:#185fa5;border-left-color:#185fa5;font-weight:600}
+.sidebar-item i{font-size:16px;flex-shrink:0}
+.sidebar-user{padding:0 1.25rem}
+.sidebar-user-name{font-size:0.875rem;font-weight:600;color:var(--text-primary)}
+.sidebar-user-id{font-size:0.72rem;color:var(--text-secondary);font-family:'Courier New',monospace;margin-top:2px;word-break:break-all}
+.badge-level{display:inline-block;padding:0.15rem 0.55rem;border-radius:10px;font-size:0.7rem;font-weight:700;margin-top:4px}
+.badge-L9{background:#EEEDFE;color:#3C3489}
+.badge-L6{background:#e1f5ee;color:#085041}
+.badge-L5{background:#faeeda;color:#633806}
+.badge-admin{background:#fef9e7;color:#7a5c00;border:1px solid #f0d060}
 
-/* ── CARDS ── */
-.card { background: var(--bg-primary); border-radius: var(--radius-lg); border: var(--border); padding: 1.25rem; }
-.card + .card { margin-top: 1rem; }
+/* CONTENT */
+.content{background:var(--bg-tertiary);padding:2rem;overflow-y:auto}
+.panel{display:none}
+.panel.active{display:block}
+.panel-title{font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:0.2rem}
+.panel-sub{font-size:0.875rem;color:var(--text-secondary);margin-bottom:1.5rem}
 
-/* ── STATS ── */
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
-.stat-card { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 0.9rem 1rem; text-align: center; }
-.stat-label { font-size: 0.72rem; color: var(--text-secondary); margin-bottom: 0.2rem; font-weight: 500; }
-.stat-value { font-size: 1.55rem; font-weight: 700; color: var(--text-primary); line-height: 1.1; }
-.stat-unit { font-size: 0.7rem; color: var(--text-secondary); }
+/* CARDS */
+.card{background:var(--bg-primary);border-radius:var(--radius-lg);border:var(--border);padding:1.25rem}
+.card+.card{margin-top:1rem}
 
-/* ── TYPING ── */
-.passage-selector { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-.passage-btn { padding: 0.38rem 1rem; border: 1px solid rgba(0,0,0,0.2); border-radius: 20px; background: var(--bg-primary); font-size: 0.82rem; cursor: pointer; font-family: inherit; transition: all 0.15s; color: var(--text-primary); }
-.passage-btn:hover { background: var(--bg-secondary); }
-.passage-btn.active { background: #1a1a2e; color: white; border-color: #1a1a2e; }
-.passage-display { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1rem; font-size: 1.15rem; line-height: 2.3; letter-spacing: 0.04em; min-height: 80px; }
-.char-correct { color: #0a5c46; background: #d4f0e5; border-radius: 3px; }
-.char-wrong { color: #8b1a1a; background: #fdd; border-radius: 3px; text-decoration: underline; }
-.char-current { background: #185fa5; color: white; border-radius: 3px; animation: blink 1s infinite; }
-.char-pending { color: var(--text-secondary); }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.35} }
-.typing-input { width: 100%; padding: 0.75rem 1rem; border: 2px solid rgba(0,0,0,0.15); border-radius: var(--radius-md); font-size: 1.05rem; font-family: inherit; resize: none; min-height: 80px; background: var(--bg-primary); color: var(--text-primary); transition: border-color 0.2s; }
-.typing-input:focus { outline: none; border-color: #185fa5; }
-.typing-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 0.75rem; flex-wrap: wrap; gap: 0.75rem; }
-.live-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-.live-stat { text-align: center; }
-.live-stat-val { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; }
-.live-stat-lbl { font-size: 0.68rem; color: var(--text-secondary); margin-top: 1px; }
-.timer-display { font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text-primary); }
-.timer-display.running { color: #0f6e56; }
-.btn-group { display: flex; gap: 0.5rem; }
-.btn-primary { padding: 0.6rem 1.5rem; background: #1a1a2e; color: white; border: none; border-radius: var(--radius-md); font-size: 0.9rem; cursor: pointer; font-family: inherit; font-weight: 600; transition: background 0.2s; }
-.btn-primary:hover { background: #2d2d4e; }
-.btn-primary:disabled { opacity: 0.4; cursor: default; }
-.btn-secondary { padding: 0.6rem 1.25rem; background: transparent; color: var(--text-primary); border: 1px solid rgba(0,0,0,0.2); border-radius: var(--radius-md); font-size: 0.9rem; cursor: pointer; font-family: inherit; transition: background 0.15s; }
-.btn-secondary:hover { background: var(--bg-secondary); }
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:1.5rem}
+.stat-card{background:var(--bg-secondary);border-radius:var(--radius-md);padding:0.9rem 1rem;text-align:center}
+.stat-label{font-size:0.72rem;color:var(--text-secondary);margin-bottom:0.2rem;font-weight:500}
+.stat-value{font-size:1.55rem;font-weight:700;color:var(--text-primary);line-height:1.1}
+.stat-unit{font-size:0.7rem;color:var(--text-secondary)}
 
-/* ── RESULT ── */
-.result-banner { background: linear-gradient(135deg, #1a1a2e 0%, #185fa5 100%); color: white; border-radius: var(--radius-lg); padding: 1.5rem; margin-top: 1rem; text-align: center; }
-.result-banner h2 { font-size: 1.4rem; margin-bottom: 0.35rem; }
-.result-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 1rem; }
-.result-item { background: rgba(255,255,255,0.12); border-radius: var(--radius-md); padding: 0.7rem; }
-.result-item-val { font-size: 1.4rem; font-weight: 700; }
-.result-item-lbl { font-size: 0.68rem; opacity: 0.82; margin-top: 2px; }
+/* TYPING */
+.passage-selector{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.passage-btn{padding:0.38rem 1rem;border:1px solid rgba(0,0,0,0.2);border-radius:20px;background:var(--bg-primary);font-size:0.82rem;cursor:pointer;font-family:inherit;transition:all 0.15s;color:var(--text-primary)}
+.passage-btn:hover{background:var(--bg-secondary)}
+.passage-btn.active{background:#1a1a2e;color:white;border-color:#1a1a2e}
+.passage-display{background:var(--bg-secondary);border-radius:var(--radius-md);padding:1.25rem;margin-bottom:1rem;font-size:1.15rem;line-height:2.3;letter-spacing:0.04em;min-height:80px}
+.char-correct{color:#0a5c46;background:#d4f0e5;border-radius:3px}
+.char-wrong{color:#8b1a1a;background:#fdd;border-radius:3px;text-decoration:underline}
+.char-current{background:#185fa5;color:white;border-radius:3px;animation:cur 1s infinite}
+.char-pending{color:var(--text-secondary)}
+@keyframes cur{0%,100%{opacity:1}50%{opacity:0.3}}
+.typing-input{width:100%;padding:0.75rem 1rem;border:2px solid rgba(0,0,0,0.15);border-radius:var(--radius-md);font-size:1.05rem;font-family:inherit;resize:none;min-height:80px;background:var(--bg-primary);color:var(--text-primary);transition:border-color 0.2s}
+.typing-input:focus{outline:none;border-color:#185fa5}
+.typing-controls{display:flex;align-items:center;justify-content:space-between;margin-top:0.75rem;flex-wrap:wrap;gap:0.75rem}
+.live-stats{display:flex;gap:1.5rem;flex-wrap:wrap}
+.live-stat{text-align:center}
+.live-stat-val{font-size:1.2rem;font-weight:700;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.live-stat-lbl{font-size:0.68rem;color:var(--text-secondary);margin-top:1px}
+.timer-display{font-size:1.4rem;font-weight:700;font-variant-numeric:tabular-nums;color:var(--text-primary)}
+.timer-display.running{color:#0f6e56}
+.btn-group{display:flex;gap:0.5rem}
+.btn-primary{padding:0.6rem 1.5rem;background:#1a1a2e;color:white;border:none;border-radius:var(--radius-md);font-size:0.9rem;cursor:pointer;font-family:inherit;font-weight:600;transition:background 0.2s}
+.btn-primary:hover{background:#2d2d4e}
+.btn-primary:disabled{opacity:0.4;cursor:default}
+.btn-secondary{padding:0.6rem 1.25rem;background:transparent;color:var(--text-primary);border:1px solid rgba(0,0,0,0.2);border-radius:var(--radius-md);font-size:0.9rem;cursor:pointer;font-family:inherit;transition:background 0.15s}
+.btn-secondary:hover{background:var(--bg-secondary)}
 
-/* ── LEADERBOARD ── */
-.level-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-.level-tab { padding: 0.42rem 1.1rem; border-radius: 20px; border: 1px solid rgba(0,0,0,0.18); background: var(--bg-primary); font-size: 0.82rem; cursor: pointer; font-family: inherit; transition: all 0.15s; color: var(--text-primary); }
-.level-tab.active { background: #1a1a2e; color: white; border-color: #1a1a2e; }
-.lb-table { width: 100%; border-collapse: collapse; }
-.lb-table th { font-size: 0.72rem; font-weight: 700; color: var(--text-secondary); text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.1); text-transform: uppercase; letter-spacing: 0.04em; }
-.lb-table td { padding: 0.6rem 0.75rem; font-size: 0.875rem; border-bottom: var(--border); color: var(--text-primary); }
-.lb-table tr:last-child td { border-bottom: none; }
-.lb-table tr:hover td { background: var(--bg-secondary); }
-.lb-table tr.me td { background: #e6f1fb; }
-.rank-badge { width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; }
-.rank-1 { background: #fef9e7; color: #b7860b; border: 1px solid #f0d060; }
-.rank-2 { background: #f1efeb; color: #666; border: 1px solid #ccc; }
-.rank-3 { background: #faeee7; color: #8b3a10; border: 1px solid #f0b08f; }
-.rank-other { background: var(--bg-secondary); color: var(--text-secondary); border: var(--border); }
+/* RESULT */
+.result-banner{background:linear-gradient(135deg,#1a1a2e 0%,#185fa5 100%);color:white;border-radius:var(--radius-lg);padding:1.5rem;margin-top:1rem;text-align:center}
+.result-banner h2{font-size:1.4rem;margin-bottom:0.35rem}
+.result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-top:1rem}
+.result-item{background:rgba(255,255,255,0.12);border-radius:var(--radius-md);padding:0.7rem}
+.result-item-val{font-size:1.4rem;font-weight:700}
+.result-item-lbl{font-size:0.68rem;opacity:0.82;margin-top:2px}
 
-/* ── HISTORY ── */
-.history-item { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0; border-bottom: var(--border); gap: 1rem; }
-.history-item:last-child { border-bottom: none; }
-.history-meta { font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px; }
-.history-scores { display: flex; gap: 1.25rem; align-items: center; }
-.history-score-block { text-align: right; }
-.history-score-label { font-size: 0.72rem; color: var(--text-secondary); }
-.history-score-val { font-weight: 600; color: var(--text-primary); }
+/* LEADERBOARD */
+.level-tabs{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.level-tab{padding:0.42rem 1.1rem;border-radius:20px;border:1px solid rgba(0,0,0,0.18);background:var(--bg-primary);font-size:0.82rem;cursor:pointer;font-family:inherit;transition:all 0.15s;color:var(--text-primary)}
+.level-tab.active{background:#1a1a2e;color:white;border-color:#1a1a2e}
+.lb-table{width:100%;border-collapse:collapse}
+.lb-table th{font-size:0.72rem;font-weight:700;color:var(--text-secondary);text-align:left;padding:0.5rem 0.75rem;border-bottom:1px solid rgba(0,0,0,0.1);text-transform:uppercase;letter-spacing:0.04em}
+.lb-table td{padding:0.6rem 0.75rem;font-size:0.875rem;border-bottom:var(--border);color:var(--text-primary)}
+.lb-table tr:last-child td{border-bottom:none}
+.lb-table tr:hover td{background:var(--bg-secondary)}
+.lb-table tr.me td{background:#e6f1fb}
+.rank-badge{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700}
+.rank-1{background:#fef9e7;color:#b7860b;border:1px solid #f0d060}
+.rank-2{background:#f1efeb;color:#666;border:1px solid #ccc}
+.rank-3{background:#faeee7;color:#8b3a10;border:1px solid #f0b08f}
+.rank-other{background:var(--bg-secondary);color:var(--text-secondary);border:var(--border)}
 
-/* ── REPORT ── */
-.report-tip { border-radius: var(--radius-md); padding: 0.75rem 1rem; font-size: 0.875rem; margin-bottom: 0.75rem; line-height: 1.6; }
-.tip-sky { background: #e6f1fb; }
-.tip-jade { background: #e1f5ee; }
-.tip-gold { background: #fef9e7; }
-.progress-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
-.progress-label { font-size: 0.78rem; color: var(--text-secondary); width: 90px; flex-shrink: 0; }
-.progress-bg { flex: 1; height: 7px; background: var(--bg-secondary); border-radius: 4px; overflow: hidden; }
-.progress-fill { height: 100%; border-radius: 4px; }
-.progress-val { font-size: 0.78rem; font-weight: 600; width: 50px; text-align: right; color: var(--text-primary); }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+/* HISTORY */
+.history-item{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 0;border-bottom:var(--border);gap:1rem}
+.history-item:last-child{border-bottom:none}
+.history-meta{font-size:0.75rem;color:var(--text-secondary);margin-top:2px}
+.history-scores{display:flex;gap:1.25rem;align-items:center}
+.history-score-block{text-align:right}
+.history-score-label{font-size:0.72rem;color:var(--text-secondary)}
+.history-score-val{font-weight:600;color:var(--text-primary)}
 
-/* ── ADMIN ── */
-.admin-label { background: #fef9e7; color: #7a5c00; border: 1px solid #f0d060; border-radius: 20px; padding: 0.18rem 0.65rem; font-size: 0.72rem; font-weight: 700; }
+/* REPORT */
+.report-tip{border-radius:var(--radius-md);padding:0.75rem 1rem;font-size:0.875rem;margin-bottom:0.75rem;line-height:1.6}
+.tip-sky{background:#e6f1fb}.tip-jade{background:#e1f5ee}.tip-gold{background:#fef9e7}
+.progress-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.6rem}
+.progress-label{font-size:0.78rem;color:var(--text-secondary);width:90px;flex-shrink:0}
+.progress-bg{flex:1;height:7px;background:var(--bg-secondary);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px}
+.progress-val{font-size:0.78rem;font-weight:600;width:50px;text-align:right;color:var(--text-primary)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 
-/* ── TOAST ── */
-.toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: #1a1a2e; color: white; padding: 0.75rem 1.25rem; border-radius: 10px; font-size: 0.875rem; z-index: 9999; transform: translateY(120px); transition: transform 0.3s ease; max-width: 300px; box-shadow: 0 4px 24px rgba(0,0,0,0.25); }
-.toast.show { transform: translateY(0); }
-.toast.success { background: #0f6e56; }
-.toast.error { background: #c0392b; }
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#1a1a2e;color:white;padding:0.75rem 1.25rem;border-radius:10px;font-size:0.875rem;z-index:9999;transform:translateY(120px);transition:transform 0.3s ease;max-width:300px;box-shadow:0 4px 24px rgba(0,0,0,0.25)}
+.toast.show{transform:translateY(0)}
+.toast.success{background:#0f6e56}
+.toast.error{background:#c0392b}
+.toast.warn{background:#7a5c00}
 
-/* ── EMPTY STATE ── */
-.empty-state { text-align: center; padding: 3rem 2rem; color: var(--text-secondary); }
-.empty-state i { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; opacity: 0.35; }
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:3rem 2rem;color:var(--text-secondary)}
+.empty-state i{font-size:2.5rem;display:block;margin-bottom:0.75rem;opacity:0.35}
 
-/* ── NOTICE BOXES ── */
-.notice-box { border-radius: var(--radius-lg); padding: 2rem; text-align: center; border: var(--border); }
-.notice-box i { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
-.notice-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
-.notice-sub { font-size: 0.875rem; color: var(--text-secondary); }
+/* NOTICES */
+.notice-box{border-radius:var(--radius-lg);padding:2rem;text-align:center;border:var(--border)}
+.notice-box i{font-size:2.5rem;display:block;margin-bottom:0.75rem}
+.notice-title{font-size:1.05rem;font-weight:700;margin-bottom:0.4rem}
+.notice-sub{font-size:0.875rem;color:var(--text-secondary)}
 
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .main-layout { grid-template-columns: 1fr; }
-  .sidebar { display: none; }
-  .content { padding: 1rem; }
-  .result-grid { grid-template-columns: repeat(2, 1fr); }
-  .two-col { grid-template-columns: 1fr; }
-  .top-nav { padding: 0 1rem; }
-  .nav-brand-sub { display: none; }
-  .live-stats { gap: 1rem; }
+/* SETUP WIZARD */
+.wizard{background:var(--bg-primary);border-radius:var(--radius-lg);border:2px solid #f0d060;padding:1.5rem;max-width:580px;margin:2rem auto}
+.wizard h2{font-size:1.1rem;font-weight:700;color:#7a5c00;margin-bottom:0.5rem}
+.wizard p{font-size:0.875rem;color:var(--text-secondary);margin-bottom:1rem;line-height:1.6}
+.wizard input{width:100%;padding:0.65rem 1rem;border:1px solid #ddd;border-radius:8px;font-size:0.9rem;font-family:monospace;margin-bottom:0.75rem;background:var(--bg-primary);color:var(--text-primary)}
+.wizard input:focus{outline:none;border-color:#185fa5}
+.wizard-steps{counter-reset:step;margin-bottom:1rem}
+.wizard-step{display:flex;gap:0.75rem;margin-bottom:0.6rem;font-size:0.82rem;color:var(--text-secondary);line-height:1.5}
+.wizard-step::before{counter-increment:step;content:counter(step);background:#e6f1fb;color:#185fa5;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0;margin-top:1px}
+.wizard-step a{color:#185fa5}
+.wizard-step code{background:var(--bg-secondary);padding:1px 5px;border-radius:4px;font-family:monospace;font-size:0.8rem}
+
+/* LOADING OVERLAY */
+.loading-overlay{position:fixed;inset:0;background:rgba(26,26,46,0.7);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;color:white;gap:1rem}
+.spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,0.2);border-top-color:white;border-radius:50%;animation:spin 0.7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .content{padding:1rem}
+  .result-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col{grid-template-columns:1fr}
+  .top-nav{padding:0 1rem}
+  .nav-brand-sub{display:none}
+  .live-stats{gap:1rem}
 }
-
-/* ── MOBILE NAV ── */
-.mobile-nav { display: none; }
-@media (max-width: 768px) {
-  .mobile-nav { display: flex; background: var(--bg-primary); border-top: var(--border); position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; }
-  .mobile-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0.6rem 0.25rem; font-size: 0.6rem; color: var(--text-secondary); cursor: pointer; border: none; background: none; font-family: inherit; gap: 2px; }
-  .mobile-nav-item i { font-size: 20px; }
-  .mobile-nav-item.active { color: #185fa5; }
-  .content { padding-bottom: 80px; }
+.mobile-nav{display:none}
+@media(max-width:768px){
+  .mobile-nav{display:flex;background:var(--bg-primary);border-top:var(--border);position:fixed;bottom:0;left:0;right:0;z-index:50}
+  .mobile-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;padding:0.6rem 0.25rem;font-size:0.6rem;color:var(--text-secondary);cursor:pointer;border:none;background:none;font-family:inherit;gap:2px}
+  .mobile-nav-item i{font-size:20px}
+  .mobile-nav-item.active{color:#185fa5}
+  .content{padding-bottom:80px}
 }
 </style>
 </head>
 <body>
 
-<!-- ════════════════════════ LOGIN ════════════════════════ -->
+<!-- LOADING OVERLAY -->
+<div id="loading-overlay" class="loading-overlay" style="display:none">
+  <div class="spinner"></div>
+  <div id="loading-msg" style="font-size:0.9rem;opacity:0.8">Syncing scores…</div>
+</div>
+
+<!-- ════ SETUP WIZARD (shown when no API key configured) ════ -->
+<div id="setup-screen" style="display:none;min-height:100vh;background:linear-gradient(135deg,#1a1a2e,#0f3460);padding:2rem;display:flex;align-items:center;justify-content:center">
+  <div class="wizard">
+    <h2>⚙️ One-Time Setup — Cloud Sync</h2>
+    <p>This contest uses <strong>JSONBin.io</strong> (free) to sync scores across all devices in real time. You need a free API key and a storage bin — takes about 3 minutes.</p>
+    <div class="wizard-steps">
+      <div class="wizard-step">Go to <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> and click <strong>Sign Up Free</strong>. Use any email.</div>
+      <div class="wizard-step">After signing in, go to <strong>API Keys</strong> (left menu) → click <strong>+ CREATE KEY</strong>. Copy the key that starts with <code>$2b$...</code></div>
+      <div class="wizard-step">Paste your API key below, then click <strong>Initialize</strong>. The platform will create a storage bin automatically.</div>
+    </div>
+    <label style="font-size:0.8rem;font-weight:600;color:#444;display:block;margin-bottom:0.4rem">JSONBin API Key</label>
+    <input type="text" id="setup-apikey" placeholder="$2b$10$..." spellcheck="false">
+    <button class="btn-primary" style="width:100%" onclick="initializeStorage()">Initialize &amp; Save →</button>
+    <div id="setup-error" style="color:#c0392b;font-size:0.82rem;margin-top:0.6rem;display:none"></div>
+    <div style="margin-top:1rem;padding-top:1rem;border-top:var(--border);font-size:0.78rem;color:var(--text-secondary)">
+      ⚡ <strong>Already have a key and bin?</strong> Enter your key above plus bin ID below (optional):
+    </div>
+    <input type="text" id="setup-binid" placeholder="Bin ID (optional — leave blank to auto-create)" spellcheck="false" style="margin-top:0.5rem">
+  </div>
+</div>
+
+<!-- ════ LOGIN ════ -->
 <div id="login-screen">
   <div class="login-card">
     <div class="login-header">
@@ -224,7 +266,7 @@ body { font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Apple 
       <div class="login-title">MHCS 中文打字競賽</div>
       <div class="login-subtitle">Mandarin Typing Contest 2026</div>
     </div>
-    <div class="login-dates">📅 May 14, 2026 8:00 AM – May 22, 2026 8:00 AM</div>
+    <div class="login-dates" id="login-dates-banner">📅 May 13, 2026 4:30 PM – May 22, 2026 8:00 AM (US Eastern)</div>
     <div class="form-group">
       <label id="lbl-loginid">Login ID</label>
       <input type="text" id="inp-id" placeholder="e.g., MHCS1309L9JC" autocomplete="off" spellcheck="false">
@@ -234,13 +276,17 @@ body { font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Apple 
       <input type="password" id="inp-pw" placeholder="Enter your password">
     </div>
     <button class="btn-login" onclick="doLogin()">登入 / Login</button>
-    <div class="login-error" id="login-error">Incorrect Login ID or password. Please try again.</div>
+    <div class="login-error" id="login-error">Incorrect Login ID or password.</div>
     <div class="admin-toggle" onclick="toggleAdmin()">Administrator Login</div>
   </div>
 </div>
 
-<!-- ════════════════════════ MAIN APP ════════════════════════ -->
+<!-- ════ MAIN APP ════ -->
 <div id="main-app">
+  <div class="sync-bar" id="sync-bar">
+    <div class="sync-dot" id="sync-dot"></div>
+    <span id="sync-msg">Scores sync across all devices</span>
+  </div>
   <nav class="top-nav">
     <div class="nav-brand">
       <span class="nav-brand-logo">🏫</span>
@@ -250,9 +296,7 @@ body { font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Apple 
       </div>
     </div>
     <div class="nav-right">
-      <div class="contest-status" id="nav-status">
-        <div class="status-dot pulse"></div><span id="nav-status-text">Active</span>
-      </div>
+      <div class="contest-status" id="nav-status"><div class="status-dot pulse"></div><span id="nav-status-text">Active</span></div>
       <div class="nav-timer" id="nav-countdown"></div>
       <div class="nav-avatar" id="nav-avatar">--</div>
       <button class="btn-logout" onclick="logout()">Logout</button>
@@ -260,8 +304,7 @@ body { font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Apple 
   </nav>
 
   <div class="main-layout">
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar">
       <div class="sidebar-section">
         <div class="sidebar-label">Contest</div>
         <div class="sidebar-item active" id="snav-type" onclick="showPanel('type')"><i class="ti ti-keyboard"></i> Type Now</div>
@@ -269,8 +312,8 @@ body { font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Apple 
         <div class="sidebar-item" id="snav-history" onclick="showPanel('history')"><i class="ti ti-history"></i> My History</div>
         <div class="sidebar-item" id="snav-report" onclick="showPanel('report')"><i class="ti ti-chart-bar"></i> My Report</div>
       </div>
-      <div class="sidebar-section" id="admin-nav" style="display:none;">
-        <div class="sidebar-label">Admin <span class="admin-label">Admin</span></div>
+      <div class="sidebar-section" id="admin-nav" style="display:none">
+        <div class="sidebar-label">Admin <span class="badge-level badge-admin">Admin</span></div>
         <div class="sidebar-item" id="snav-admin" onclick="showPanel('admin')"><i class="ti ti-shield"></i> Dashboard</div>
       </div>
       <div class="sidebar-section">
@@ -283,56 +326,43 @@ body { font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Apple 
       </div>
     </aside>
 
-    <!-- CONTENT -->
     <main class="content">
 
-      <!-- TYPE PANEL -->
+      <!-- TYPE -->
       <div class="panel active" id="panel-type">
         <div class="panel-title">打字測驗 Typing Test</div>
         <div class="panel-sub">Choose a level and passage, then type as accurately and quickly as you can.</div>
-        <div id="notice-upcoming" class="notice-box card" style="display:none; background:#fef9e7;">
-          <i class="ti ti-clock" style="color:#b7860b;"></i>
-          <div class="notice-title">Contest starts May 14, 2026 at 8:00 AM</div>
-          <div class="notice-sub">Check back then — your passages will be ready!</div>
+        <div id="notice-upcoming" class="notice-box card" style="display:none;background:#fef9e7">
+          <i class="ti ti-clock" style="color:#b7860b"></i>
+          <div class="notice-title">Contest starts May 13, 2026 at 4:30 PM Eastern</div>
+          <div class="notice-sub" id="upcoming-countdown">Check back soon — your passages will be ready!</div>
         </div>
-        <div id="notice-ended" class="notice-box card" style="display:none; background:#e6f1fb;">
-          <i class="ti ti-trophy" style="color:#185fa5;"></i>
+        <div id="notice-ended" class="notice-box card" style="display:none;background:#e6f1fb">
+          <i class="ti ti-trophy" style="color:#185fa5"></i>
           <div class="notice-title">The contest has ended!</div>
           <div class="notice-sub">View your final results in My Report.</div>
         </div>
         <div id="typing-wrap">
-          <div class="card" style="margin-bottom:1rem;">
-            <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:0.5rem; font-weight:600;">Select level:</div>
+          <div class="card" style="margin-bottom:1rem">
+            <div style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:0.5rem;font-weight:600">Select level:</div>
             <div class="passage-selector" id="level-sel"></div>
-            <div style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:0.5rem; margin-top:0.75rem; font-weight:600;">Select passage:</div>
+            <div style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:0.5rem;margin-top:0.75rem;font-weight:600">Select passage:</div>
             <div class="passage-selector" id="passage-sel"></div>
           </div>
           <div class="card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem;">
-              <span style="font-size:0.82rem; font-weight:600; color:var(--text-secondary);">Passage:</span>
-              <span style="font-size:0.75rem; color:var(--text-secondary);" id="char-progress"></span>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem">
+              <span style="font-size:0.82rem;font-weight:600;color:var(--text-secondary)">Passage:</span>
+              <span style="font-size:0.75rem;color:var(--text-secondary)" id="char-progress"></span>
             </div>
             <div class="passage-display" id="passage-display">Select a passage above to begin.</div>
-            <div style="font-size:0.82rem; font-weight:600; color:var(--text-secondary); margin-bottom:0.4rem;">Type here (activate your Chinese IME first):</div>
-            <textarea class="typing-input" id="typing-input" placeholder="Click here, then start typing in Chinese..." disabled rows="3"></textarea>
+            <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.4rem">Type here (activate your Chinese IME first):</div>
+            <textarea class="typing-input" id="typing-input" placeholder="Click here, then start typing in Chinese…" disabled rows="3"></textarea>
             <div class="typing-controls">
               <div class="live-stats">
-                <div class="live-stat">
-                  <div class="timer-display" id="timer-disp">0:00</div>
-                  <div class="live-stat-lbl">Time</div>
-                </div>
-                <div class="live-stat">
-                  <div class="live-stat-val" id="live-cpm">0</div>
-                  <div class="live-stat-lbl">Chars/min</div>
-                </div>
-                <div class="live-stat">
-                  <div class="live-stat-val" id="live-acc">—</div>
-                  <div class="live-stat-lbl">Accuracy</div>
-                </div>
-                <div class="live-stat">
-                  <div class="live-stat-val" id="live-correct">0</div>
-                  <div class="live-stat-lbl">Correct</div>
-                </div>
+                <div class="live-stat"><div class="timer-display" id="timer-disp">0:00</div><div class="live-stat-lbl">Time</div></div>
+                <div class="live-stat"><div class="live-stat-val" id="live-cpm">0</div><div class="live-stat-lbl">Chars/min</div></div>
+                <div class="live-stat"><div class="live-stat-val" id="live-acc">—</div><div class="live-stat-lbl">Accuracy</div></div>
+                <div class="live-stat"><div class="live-stat-val" id="live-correct">0</div><div class="live-stat-lbl">Correct</div></div>
               </div>
               <div class="btn-group">
                 <button class="btn-secondary" onclick="resetTyping()">Reset</button>
@@ -340,85 +370,82 @@ body { font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Apple 
               </div>
             </div>
           </div>
-          <div id="result-area" style="display:none;"></div>
+          <div id="result-area"></div>
         </div>
       </div>
 
-      <!-- LEADERBOARD PANEL -->
+      <!-- LEADERBOARD -->
       <div class="panel" id="panel-leaderboard">
         <div class="panel-title">排行榜 Leaderboard</div>
-        <div class="panel-sub">Best scores per passage. Your row is highlighted in blue.</div>
+        <div class="panel-sub">Best score per passage — synced live across all devices. Your row is highlighted.</div>
         <div class="level-tabs" id="lb-tabs"></div>
         <div class="card">
           <table class="lb-table">
-            <thead><tr>
-              <th style="width:36px;">#</th>
-              <th>Participant</th>
-              <th>Level</th>
-              <th>Passage</th>
-              <th>Accuracy</th>
-              <th>Speed</th>
-              <th>Score</th>
-            </tr></thead>
+            <thead><tr><th style="width:36px">#</th><th>Participant</th><th>Level</th><th>Passage</th><th>Accuracy</th><th>Speed</th><th>Score</th></tr></thead>
             <tbody id="lb-body"></tbody>
           </table>
         </div>
+        <div style="text-align:right;margin-top:0.6rem"><button class="btn-secondary" onclick="refreshAll()" style="font-size:0.8rem"><i class="ti ti-refresh" style="margin-right:4px"></i>Refresh</button></div>
       </div>
 
-      <!-- HISTORY PANEL -->
+      <!-- HISTORY -->
       <div class="panel" id="panel-history">
         <div class="panel-title">我的紀錄 My Attempts</div>
         <div class="panel-sub">Every attempt you've submitted, most recent first.</div>
-        <div class="card" id="history-card"><div id="history-list"></div></div>
+        <div class="card"><div id="history-list"></div></div>
       </div>
 
-      <!-- REPORT PANEL -->
+      <!-- REPORT -->
       <div class="panel" id="panel-report">
         <div class="panel-title">個人報告 Personal Report</div>
         <div class="panel-sub">Your performance summary and personalized feedback.</div>
         <div id="report-content"></div>
       </div>
 
-      <!-- ADMIN PANEL -->
+      <!-- ADMIN -->
       <div class="panel" id="panel-admin">
-        <div class="panel-title">Admin Dashboard <span class="admin-label">Administrator</span></div>
-        <div class="panel-sub">Full view of all participants and scores across all levels.</div>
+        <div class="panel-title">Admin Dashboard <span class="badge-level badge-admin">Administrator</span></div>
+        <div class="panel-sub">Full view of all participants and scores. Auto-refreshes every 60 seconds.</div>
         <div class="stats-grid" id="admin-stats"></div>
         <div class="level-tabs" id="admin-tabs"></div>
         <div class="card">
           <table class="lb-table">
-            <thead><tr>
-              <th>#</th><th>Login ID</th><th>Name</th><th>Level</th>
-              <th>Attempts</th><th>Best Score</th><th>Best Acc.</th><th>Best Speed</th>
-            </tr></thead>
+            <thead><tr><th>#</th><th>Login ID</th><th>Name</th><th>Level</th><th>Attempts</th><th>Best Score</th><th>Best Acc.</th><th>Best Speed</th></tr></thead>
             <tbody id="admin-body"></tbody>
           </table>
         </div>
-        <div style="margin-top:1.25rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
-          <button class="btn-primary" onclick="exportCSV()"><i class="ti ti-download" style="margin-right:5px;"></i>Export All Scores (CSV)</button>
-          <button class="btn-secondary" onclick="showToast('Final reports ready — see My Report for each user.','success')"><i class="ti ti-file-text" style="margin-right:5px;"></i>Generate Final Reports</button>
+        <div style="margin-top:1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap">
+          <button class="btn-primary" onclick="exportCSV()"><i class="ti ti-download" style="margin-right:5px"></i>Export All Scores (CSV)</button>
+          <button class="btn-secondary" onclick="refreshAll()"><i class="ti ti-refresh" style="margin-right:5px"></i>Refresh Now</button>
         </div>
       </div>
 
     </main>
   </div>
 
-  <!-- MOBILE BOTTOM NAV -->
   <nav class="mobile-nav">
     <button class="mobile-nav-item active" id="mnav-type" onclick="showPanel('type')"><i class="ti ti-keyboard"></i>Type</button>
     <button class="mobile-nav-item" id="mnav-leaderboard" onclick="showPanel('leaderboard')"><i class="ti ti-trophy"></i>Ranks</button>
     <button class="mobile-nav-item" id="mnav-history" onclick="showPanel('history')"><i class="ti ti-history"></i>History</button>
     <button class="mobile-nav-item" id="mnav-report" onclick="showPanel('report')"><i class="ti ti-chart-bar"></i>Report</button>
-    <button class="mobile-nav-item" id="mnav-admin" onclick="showPanel('admin')" style="display:none;"><i class="ti ti-shield"></i>Admin</button>
+    <button class="mobile-nav-item" id="mnav-admin" onclick="showPanel('admin')" style="display:none"><i class="ti ti-shield"></i>Admin</button>
   </nav>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ════════════════════════════════════════════════
-// DATA
-// ════════════════════════════════════════════════
+// ═══════════════════════════════════════
+// CONTEST TIMES  (US Eastern = UTC-4 in May)
+// Start: May 13 2026 4:30 PM ET = 20:30 UTC
+// End:   May 22 2026 8:00 AM ET = 12:00 UTC
+// ═══════════════════════════════════════
+const CONTEST_START = new Date('2026-05-13T20:30:00Z');
+const CONTEST_END   = new Date('2026-05-22T12:00:00Z');
+
+// ═══════════════════════════════════════
+// PASSAGES
+// ═══════════════════════════════════════
 const PASSAGES = {
   L9:[
     {id:'L9P1',label:'段落 1',text:'我從不肯放棄的一張紙，總是留著----留著,折成一隻隻很小的船兒,從船頭到船腳,都是平平的。'},
@@ -456,99 +483,282 @@ const USERS = [
   {id:'ADMIN', pw:'MHCS@dmin2026', name:'Administrator', zh:'管理員', level:'ADMIN', initials:'AD', isAdmin:true}
 ];
 
-const CONTEST_START = new Date('2026-05-14T08:00:00');
-const CONTEST_END   = new Date('2026-05-22T08:00:00');
+// ═══════════════════════════════════════
+// JSONBIN STORAGE
+// ═══════════════════════════════════════
+const LS_KEY_API  = 'mhcs_jb_apikey';
+const LS_KEY_BIN  = 'mhcs_jb_binid';
+const LS_FALLBACK = 'mhcs_typing_2026_local';
+const JB_BASE     = 'https://api.jsonbin.io/v3';
+$2a$10$kctd8EeDs5fYr9EfoRdOUuBMnIBXeInoPxQEPIr.PmFR8RNC9/8La
+let JB_KEY = '$2a$10$FFKR6Vgj6ZIT3yv4C/df2OdrKyOnmwyawoCauMWLtyA6UrtHaOWvq';
+let JB_BIN = '6a04ebfdadc21f119a976aca' ;
+let syncInFlight = false;
+let pendingQueue = []; // attempts queued while offline
 
-// ════════════════════════════════════════════════
-// STORAGE  (localStorage with shared-key simulation)
-// ════════════════════════════════════════════════
-const STORE_KEY = 'mhcs_typing_2026_attempts';
-function loadAttempts(){try{return JSON.parse(localStorage.getItem(STORE_KEY)||'[]');}catch(e){return[];}}
-function saveAttemptLocal(a){const all=loadAttempts();all.push(a);localStorage.setItem(STORE_KEY,JSON.stringify(all));}
+function hasCreds(){ return JB_KEY && JB_BIN; }
 
-// ════════════════════════════════════════════════
-// STATE
-// ════════════════════════════════════════════════
-let CU=null, CP=null, CL=null, timer=null, secs=0, started=false, adminMode=false;
-let lbLevel='ALL', adminLevel='ALL';
+function setSyncUI(state, msg){
+  const dot = document.getElementById('sync-dot');
+  const txt = document.getElementById('sync-msg');
+  if(!dot) return;
+  dot.className = 'sync-dot' + (state==='syncing'?' syncing': state==='error'?' error':'');
+  if(txt && msg) txt.textContent = msg;
+}
 
-// ════════════════════════════════════════════════
+async function jbGet(){
+  const r = await fetch(`${JB_BASE}/b/${JB_BIN}/latest`, {
+    headers:{'X-Master-Key': JB_KEY, 'X-Bin-Meta':'false'}
+  });
+  if(!r.ok) throw new Error('GET '+r.status);
+  const d = await r.json();
+  return Array.isArray(d) ? d : (d.attempts || []);
+}
+
+async function jbPut(attempts){
+  const r = await fetch(`${JB_BASE}/b/${JB_BIN}`, {
+    method:'PUT',
+    headers:{'Content-Type':'application/json','X-Master-Key': JB_KEY},
+    body: JSON.stringify({attempts})
+  });
+  if(!r.ok) throw new Error('PUT '+r.status);
+}
+
+async function jbCreate(name){
+  const r = await fetch(`${JB_BASE}/b`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json','X-Master-Key': JB_KEY,'X-Bin-Name':name,'X-Bin-Private':'false'},
+    body: JSON.stringify({attempts:[]})
+  });
+  if(!r.ok) throw new Error('CREATE '+r.status);
+  const d = await r.json();
+  return d.metadata.id;
+}
+
+// Primary: JSONBin. Fallback: localStorage.
+async function loadAttempts(){
+  if(hasCreds()){
+    try{
+      const remote = await jbGet();
+      localStorage.setItem(LS_FALLBACK, JSON.stringify(remote)); // cache
+      return remote;
+    }catch(e){
+      console.warn('Cloud fetch failed, using local cache', e);
+      setSyncUI('error','Offline — showing cached scores');
+    }
+  }
+  try{ return JSON.parse(localStorage.getItem(LS_FALLBACK)||'[]'); }catch(e){ return []; }
+}
+
+async function saveAttempt(attempt){
+  // Always save locally first (instant, resilient)
+  const local = JSON.parse(localStorage.getItem(LS_FALLBACK)||'[]');
+  local.push(attempt);
+  localStorage.setItem(LS_FALLBACK, JSON.stringify(local));
+
+  if(!hasCreds()){ showToast('Saved locally (no cloud sync configured)','warn'); return; }
+
+  setSyncUI('syncing','Syncing…');
+  try{
+    // Read-modify-write with retry
+    let remote = [];
+    for(let i=0;i<3;i++){
+      try{ remote = await jbGet(); break; }catch(e){ if(i===2) throw e; await sleep(600*(i+1)); }
+    }
+    remote.push(attempt);
+    await jbPut(remote);
+    localStorage.setItem(LS_FALLBACK, JSON.stringify(remote));
+    setSyncUI('ok','Synced ✓');
+    setTimeout(()=>setSyncUI('ok','Scores sync across all devices'), 3000);
+  }catch(e){
+    console.error('Sync failed', e);
+    setSyncUI('error','Sync failed — score saved locally');
+    showToast('Cloud sync failed — score saved locally. It will appear for you, but not others until sync recovers.','warn');
+  }
+}
+
+function sleep(ms){ return new Promise(r=>setTimeout(r,ms)); }
+function showLoading(msg){ document.getElementById('loading-overlay').style.display='flex'; document.getElementById('loading-msg').textContent=msg||'Loading…'; }
+function hideLoading(){ document.getElementById('loading-overlay').style.display='none'; }
+
+// ═══════════════════════════════════════
+// SETUP WIZARD
+// ═══════════════════════════════════════
+async function initializeStorage(){
+  const key = document.getElementById('setup-apikey').value.trim();
+  const binId = document.getElementById('setup-binid').value.trim();
+  const errEl = document.getElementById('setup-error');
+  errEl.style.display='none';
+  if(!key){ errEl.textContent='Please enter your API key.'; errEl.style.display='block'; return; }
+
+  showLoading('Connecting to JSONBin…');
+  try{
+    JB_KEY = key;
+    localStorage.setItem(LS_KEY_API, key);
+    if(binId){
+      JB_BIN = binId;
+      localStorage.setItem(LS_KEY_BIN, binId);
+      // Test read
+      await jbGet();
+    } else {
+      // Create new bin
+      JB_BIN = await jbCreate('MHCS-Typing-2026');
+      localStorage.setItem(LS_KEY_BIN, JB_BIN);
+    }
+    hideLoading();
+    document.getElementById('setup-screen').style.display='none';
+    document.getElementById('login-screen').style.display='flex';
+    showToast('Cloud sync ready! Bin ID: '+JB_BIN,'success');
+  }catch(e){
+    hideLoading();
+    JB_KEY=''; JB_BIN='';
+    localStorage.removeItem(LS_KEY_API); localStorage.removeItem(LS_KEY_BIN);
+    errEl.textContent = 'Connection failed: '+e.message+'. Check your API key and try again.';
+    errEl.style.display='block';
+  }
+}
+
+// ═══════════════════════════════════════
+// STARTUP — check creds
+// ═══════════════════════════════════════
+window.addEventListener('DOMContentLoaded', ()=>{
+  if(JB_KEY && JB_BIN){
+    // Creds already saved — go straight to login
+    document.getElementById('setup-screen').style.display='none';
+    document.getElementById('login-screen').style.display='flex';
+  } else {
+    // Show setup wizard
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('setup-screen').style.display='flex';
+  }
+});
+
+// ═══════════════════════════════════════
 // HELPERS
-// ════════════════════════════════════════════════
-function fmt(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
-function contestStatus(){const n=new Date();return n<CONTEST_START?'upcoming':n>CONTEST_END?'ended':'active';}
-function timeLeft(t){const d=Math.max(0,Math.floor((t-new Date())/1000));const h=Math.floor(d/3600),m=Math.floor((d%3600)/60),s=d%60;if(d>=86400)return Math.floor(d/86400)+'d '+h%24+'h '+m+'m';if(h>0)return h+'h '+m+'m '+s+'s';return m+'m '+s+'s';}
-function showToast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+type+' show';setTimeout(()=>t.className='toast '+type,3200);}
+// ═══════════════════════════════════════
+function fmt(s){ return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+function contestStatus(){ const n=new Date(); return n<CONTEST_START?'upcoming':n>CONTEST_END?'ended':'active'; }
+function timeLeft(t){
+  const d=Math.max(0,Math.floor((t-new Date())/1000));
+  const h=Math.floor(d/3600),m=Math.floor((d%3600)/60),s=d%60;
+  if(d>=86400) return Math.floor(d/86400)+'d '+h%24+'h '+m+'m';
+  if(h>0) return h+'h '+m+'m '+s+'s';
+  return m+'m '+s+'s';
+}
+function showToast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast '+type+' show';
+  setTimeout(()=>t.className='toast '+type, 4000);
+}
 
-// ════════════════════════════════════════════════
+// ═══════════════════════════════════════
 // LOGIN
-// ════════════════════════════════════════════════
-document.getElementById('inp-pw').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-document.getElementById('inp-id').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-function toggleAdmin(){adminMode=!adminMode;document.getElementById('lbl-loginid').textContent=adminMode?'Admin ID':'Login ID';document.getElementById('inp-id').placeholder=adminMode?'ADMIN':'e.g., MHCS1309L9JC';document.querySelector('.admin-toggle').textContent=adminMode?'Back to Student Login':'Administrator Login';}
-function doLogin(){
+// ═══════════════════════════════════════
+let CU=null,CP=null,CL=null,timer=null,secs=0,started=false,adminMode=false;
+let lbLevel='ALL', adminLevel='ALL';
+let autoRefreshTimer=null;
+
+document.getElementById('inp-pw').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
+document.getElementById('inp-id').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
+
+function toggleAdmin(){
+  adminMode=!adminMode;
+  document.getElementById('lbl-loginid').textContent=adminMode?'Admin ID':'Login ID';
+  document.getElementById('inp-id').placeholder=adminMode?'ADMIN':'e.g., MHCS1309L9JC';
+  document.querySelector('.admin-toggle').textContent=adminMode?'← Back to Student Login':'Administrator Login';
+}
+
+async function doLogin(){
   const id=document.getElementById('inp-id').value.trim();
   const pw=document.getElementById('inp-pw').value;
   const u=USERS.find(u=>u.id===id&&u.pw===pw);
   const err=document.getElementById('login-error');
-  if(!u){err.style.display='block';return;}
+  if(!u){ err.style.display='block'; return; }
   err.style.display='none';
   CU=u;
+  showLoading('Signing in…');
+  // Pre-load data before showing app
+  try{ await loadAttempts(); }catch(e){ /* non-fatal */ }
+  hideLoading();
   document.getElementById('login-screen').style.display='none';
   document.getElementById('main-app').style.display='block';
   initApp();
 }
-function logout(){CU=null;stopTimer();document.getElementById('main-app').style.display='none';document.getElementById('login-screen').style.display='flex';document.getElementById('inp-id').value='';document.getElementById('inp-pw').value='';}
 
-// ════════════════════════════════════════════════
+function logout(){
+  CU=null; stopTimer();
+  clearInterval(autoRefreshTimer);
+  document.getElementById('main-app').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('inp-id').value='';
+  document.getElementById('inp-pw').value='';
+}
+
+// ═══════════════════════════════════════
 // APP INIT
-// ════════════════════════════════════════════════
+// ═══════════════════════════════════════
 function initApp(){
   document.getElementById('nav-avatar').textContent=CU.initials;
   document.getElementById('sb-name').textContent=CU.name+' '+CU.zh;
   document.getElementById('sb-id').textContent=CU.id;
-  const lc={'L9':'badge-L9','L6':'badge-L6','L5':'badge-L5','ADMIN':'badge-admin'};
+  const lc={L9:'badge-L9',L6:'badge-L6',L5:'badge-L5',ADMIN:'badge-admin'};
   document.getElementById('sb-badge').innerHTML=`<span class="badge-level ${lc[CU.level]||'badge-L9'}">${CU.level}</span>`;
-  if(CU.isAdmin){document.getElementById('admin-nav').style.display='block';document.getElementById('mnav-admin').style.display='flex';}
-  updateStatusUI();setInterval(updateStatusUI,8000);
-  initTypingPanel();buildLbTabs();buildAdminTabs();
-  loadLB();loadHistory();loadReport();if(CU.isAdmin)loadAdmin();
+  if(CU.isAdmin){ document.getElementById('admin-nav').style.display='block'; document.getElementById('mnav-admin').style.display='flex'; }
+  updateStatusUI(); setInterval(updateStatusUI,10000);
+  initTypingPanel(); buildLbTabs(); buildAdminTabs();
+  loadLB(); loadHistory(); loadReport(); if(CU.isAdmin) loadAdmin();
+  // Auto-refresh leaderboard every 60 seconds
+  autoRefreshTimer = setInterval(()=>{
+    loadLB();
+    if(CU.isAdmin) loadAdmin();
+  }, 60000);
 }
+
 function updateStatusUI(){
   const st=contestStatus();
   const badge=document.getElementById('nav-status');
   const txt=document.getElementById('nav-status-text');
   const cd=document.getElementById('nav-countdown');
   badge.className='contest-status ';
-  if(st==='active'){badge.classList.add('status-active');txt.textContent='Contest Active';cd.textContent='Ends: '+timeLeft(CONTEST_END);}
-  else if(st==='upcoming'){badge.classList.add('status-upcoming');txt.textContent='Upcoming';cd.textContent='Starts: '+timeLeft(CONTEST_START);}
-  else{badge.classList.add('status-ended');txt.textContent='Contest Ended';cd.textContent='May 14–22, 2026';}
+  if(st==='active'){ badge.classList.add('status-active'); txt.textContent='Contest Active'; cd.textContent='Ends: '+timeLeft(CONTEST_END); }
+  else if(st==='upcoming'){ badge.classList.add('status-upcoming'); txt.textContent='Upcoming'; cd.textContent='Starts: '+timeLeft(CONTEST_START); document.getElementById('upcoming-countdown').textContent='Starts in: '+timeLeft(CONTEST_START); }
+  else{ badge.classList.add('status-ended'); txt.textContent='Contest Ended'; cd.textContent='May 13–22, 2026'; }
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════════════════════
 // PANEL NAVIGATION
-// ════════════════════════════════════════════════
+// ═══════════════════════════════════════
 function showPanel(name){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.sidebar-item,.mobile-nav-item').forEach(s=>s.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
-  const si=document.getElementById('snav-'+name);if(si)si.classList.add('active');
-  const mi=document.getElementById('mnav-'+name);if(mi)mi.classList.add('active');
-  if(name==='leaderboard')loadLB();
-  if(name==='history')loadHistory();
-  if(name==='report')loadReport();
-  if(name==='admin')loadAdmin();
+  const si=document.getElementById('snav-'+name); if(si) si.classList.add('active');
+  const mi=document.getElementById('mnav-'+name); if(mi) mi.classList.add('active');
+  if(name==='leaderboard') loadLB();
+  if(name==='history')     loadHistory();
+  if(name==='report')      loadReport();
+  if(name==='admin')       loadAdmin();
 }
 
-// ════════════════════════════════════════════════
+async function refreshAll(){
+  showLoading('Refreshing scores…');
+  await loadLB();
+  await loadHistory();
+  await loadReport();
+  if(CU&&CU.isAdmin) await loadAdmin();
+  hideLoading();
+  showToast('Scores refreshed ✓','success');
+}
+
+// ═══════════════════════════════════════
 // TYPING PANEL
-// ════════════════════════════════════════════════
+// ═══════════════════════════════════════
 function initTypingPanel(){
   const st=contestStatus();
-  document.getElementById('notice-upcoming').style.display=st==='upcoming'?'block':'none';
-  document.getElementById('notice-ended').style.display=st==='ended'?'block':'none';
-  document.getElementById('typing-wrap').style.display=st==='active'?'block':'none';
-  if(st!=='active')return;
+  document.getElementById('notice-upcoming').style.display = st==='upcoming'?'block':'none';
+  document.getElementById('notice-ended').style.display   = st==='ended'?'block':'none';
+  document.getElementById('typing-wrap').style.display    = st==='active'?'block':'none';
+  if(st!=='active') return;
   const lsel=document.getElementById('level-sel');
   lsel.innerHTML='';
   ['L5','L6','L9'].forEach(lv=>{
@@ -560,6 +770,7 @@ function initTypingPanel(){
   });
   selectLevel(CU.level==='ADMIN'?'L9':CU.level);
 }
+
 function selectLevel(lv){
   CL=lv;
   document.querySelectorAll('#level-sel .passage-btn').forEach(b=>b.classList.toggle('active',b.textContent.startsWith(lv)));
@@ -574,39 +785,43 @@ function selectLevel(lv){
   });
   selectPassage(lv,0);
 }
+
 function selectPassage(lv,idx){
-  stopTimer();started=false;secs=0;
+  stopTimer(); started=false; secs=0;
   CP=PASSAGES[lv][idx];
   document.querySelectorAll('#passage-sel .passage-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
   renderPassage('');
   const inp=document.getElementById('typing-input');
-  inp.value='';inp.disabled=false;
+  inp.value=''; inp.disabled=false;
   document.getElementById('timer-disp').textContent='0:00';
   document.getElementById('timer-disp').className='timer-display';
   document.getElementById('live-cpm').textContent='0';
   document.getElementById('live-acc').textContent='—';
   document.getElementById('live-correct').textContent='0';
   document.getElementById('btn-submit').disabled=true;
-  document.getElementById('result-area').style.display='none';
+  document.getElementById('result-area').innerHTML='';
 }
+
 function renderPassage(typed){
-  if(!CP)return;
-  const txt=CP.text;let html='';
+  if(!CP) return;
+  const txt=CP.text; let html='';
   for(let i=0;i<txt.length;i++){
-    if(i<typed.length){html+=typed[i]===txt[i]?`<span class="char-correct">${txt[i]}</span>`:`<span class="char-wrong">${txt[i]}</span>`;}
-    else if(i===typed.length){html+=`<span class="char-current">${txt[i]}</span>`;}
-    else{html+=`<span class="char-pending">${txt[i]}</span>`;}
+    if(i<typed.length){ html+=typed[i]===txt[i]?`<span class="char-correct">${escH(txt[i])}</span>`:`<span class="char-wrong">${escH(txt[i])}</span>`; }
+    else if(i===typed.length){ html+=`<span class="char-current">${escH(txt[i])}</span>`; }
+    else{ html+=`<span class="char-pending">${escH(txt[i])}</span>`; }
   }
   document.getElementById('passage-display').innerHTML=html;
   document.getElementById('char-progress').textContent=`${Math.min(typed.length,txt.length)} / ${txt.length}`;
 }
+function escH(c){ return c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
 document.getElementById('typing-input').addEventListener('input',function(){
-  if(!CP)return;
-  if(!started){started=true;startTimer();}
+  if(!CP) return;
+  if(!started){ started=true; startTimer(); }
   const typed=this.value, txt=CP.text;
   renderPassage(typed);
   let correct=0;
-  for(let i=0;i<Math.min(typed.length,txt.length);i++)if(typed[i]===txt[i])correct++;
+  for(let i=0;i<Math.min(typed.length,txt.length);i++) if(typed[i]===txt[i]) correct++;
   const acc=typed.length>0?Math.round(correct/Math.min(typed.length,txt.length)*100):0;
   const cpm=secs>0?Math.round(correct/secs*60):0;
   document.getElementById('live-cpm').textContent=cpm;
@@ -614,160 +829,174 @@ document.getElementById('typing-input').addEventListener('input',function(){
   document.getElementById('live-correct').textContent=correct;
   document.getElementById('btn-submit').disabled=typed.length<3;
 });
-function startTimer(){timer=setInterval(()=>{secs++;document.getElementById('timer-disp').textContent=fmt(secs);document.getElementById('timer-disp').className='timer-display running';},1000);}
-function stopTimer(){clearInterval(timer);timer=null;}
-function resetTyping(){stopTimer();started=false;secs=0;if(!CP)return;document.getElementById('typing-input').value='';document.getElementById('timer-disp').textContent='0:00';document.getElementById('timer-disp').className='timer-display';document.getElementById('live-cpm').textContent='0';document.getElementById('live-acc').textContent='—';document.getElementById('live-correct').textContent='0';document.getElementById('btn-submit').disabled=true;renderPassage('');}
-function submitAttempt(){
-  if(!CP||!CU)return;
+
+function startTimer(){ timer=setInterval(()=>{ secs++; document.getElementById('timer-disp').textContent=fmt(secs); document.getElementById('timer-disp').className='timer-display running'; },1000); }
+function stopTimer(){ clearInterval(timer); timer=null; }
+
+function resetTyping(){
+  stopTimer(); started=false; secs=0;
+  if(!CP) return;
+  document.getElementById('typing-input').value='';
+  document.getElementById('timer-disp').textContent='0:00';
+  document.getElementById('timer-disp').className='timer-display';
+  document.getElementById('live-cpm').textContent='0';
+  document.getElementById('live-acc').textContent='—';
+  document.getElementById('live-correct').textContent='0';
+  document.getElementById('btn-submit').disabled=true;
+  renderPassage('');
+}
+
+async function submitAttempt(){
+  if(!CP||!CU) return;
   stopTimer();
   const typed=document.getElementById('typing-input').value;
-  const txt=CP.text;let correct=0,errors=0;
-  for(let i=0;i<Math.min(typed.length,txt.length);i++){if(typed[i]===txt[i])correct++;else errors++;}
+  const txt=CP.text; let correct=0,errors=0;
+  for(let i=0;i<Math.min(typed.length,txt.length);i++){ if(typed[i]===txt[i]) correct++; else errors++; }
   const acc=typed.length>0?Math.round(correct/Math.min(typed.length,txt.length)*100):0;
   const cpm=secs>0?Math.round(correct/secs*60):0;
   const score=Math.round(cpm*(acc/100));
-  const attempt={userId:CU.id,userName:CU.name,userZh:CU.zh,level:CL,passageId:CP.id,passageLabel:CP.label,typed,correct,errors,accuracy:acc,cpm,score,seconds:secs,totalChars:txt.length,timestamp:new Date().toISOString()};
-  saveAttemptLocal(attempt);
+  const attempt={
+    userId:CU.id, userName:CU.name, userZh:CU.zh,
+    level:CL, passageId:CP.id, passageLabel:CP.label,
+    typed, correct, errors, accuracy:acc, cpm, score,
+    seconds:secs, totalChars:txt.length,
+    timestamp:new Date().toISOString()
+  };
+  document.getElementById('btn-submit').disabled=true;
   showResultBanner(attempt);
   document.getElementById('typing-input').value='';
-  started=false;secs=0;
-  loadHistory();loadLB();loadReport();if(CU.isAdmin)loadAdmin();
-  showToast('Score saved! 成績已儲存 ✓','success');
-}
-function showResultBanner(a){
-  const area=document.getElementById('result-area');
-  area.style.display='block';
-  const msgs=a.accuracy>=95?['🏆 Outstanding! 太厲害了！','你的準確率和速度都非常出色！Exceptional accuracy and speed!']:a.accuracy>=80?['🎉 Great job! 做得好！','很棒的表現！Keep pushing for higher accuracy!']:['💪 Good effort! 繼續加油！','Practice makes perfect — try again for a better score!'];
-  area.innerHTML=`<div class="result-banner"><h2>${msgs[0]}</h2><p style="opacity:0.82;font-size:0.875rem;">${msgs[1]}</p><div class="result-grid"><div class="result-item"><div class="result-item-val">${a.accuracy}%</div><div class="result-item-lbl">Accuracy 準確率</div></div><div class="result-item"><div class="result-item-val">${a.cpm}</div><div class="result-item-lbl">Chars/min 字/分</div></div><div class="result-item"><div class="result-item-val">${a.score}</div><div class="result-item-lbl">Score 分數</div></div><div class="result-item"><div class="result-item-val">${fmt(a.seconds)}</div><div class="result-item-lbl">Time 時間</div></div></div></div>`;
+  started=false; secs=0;
+  await saveAttempt(attempt);
+  await loadHistory();
+  await loadLB();
+  await loadReport();
+  if(CU.isAdmin) await loadAdmin();
+  showToast('Score saved & synced! 成績已儲存 ✓','success');
 }
 
-// ════════════════════════════════════════════════
+function showResultBanner(a){
+  const msgs=a.accuracy>=95
+    ?['🏆 Outstanding! 太厲害了！','你的準確率和速度都非常出色！']
+    :a.accuracy>=80
+    ?['🎉 Great job! 做得好！','很棒的表現！Keep pushing!']
+    :['💪 Good effort! 繼續加油！','Practice makes perfect!'];
+  document.getElementById('result-area').innerHTML=`<div class="result-banner"><h2>${msgs[0]}</h2><p style="opacity:0.82;font-size:0.875rem">${msgs[1]}</p><div class="result-grid"><div class="result-item"><div class="result-item-val">${a.accuracy}%</div><div class="result-item-lbl">Accuracy 準確率</div></div><div class="result-item"><div class="result-item-val">${a.cpm}</div><div class="result-item-lbl">Chars/min 字/分</div></div><div class="result-item"><div class="result-item-val">${a.score}</div><div class="result-item-lbl">Score 分數</div></div><div class="result-item"><div class="result-item-val">${fmt(a.seconds)}</div><div class="result-item-lbl">Time 時間</div></div></div></div>`;
+}
+
+// ═══════════════════════════════════════
 // LEADERBOARD
-// ════════════════════════════════════════════════
+// ═══════════════════════════════════════
 function buildLbTabs(){
-  const tabs=document.getElementById('lb-tabs');tabs.innerHTML='';
+  const tabs=document.getElementById('lb-tabs'); tabs.innerHTML='';
   ['ALL','L9','L6','L5'].forEach(lv=>{
-    const b=document.createElement('button');b.className='level-tab'+(lv==='ALL'?' active':'');
+    const b=document.createElement('button'); b.className='level-tab'+(lv==='ALL'?' active':'');
     b.textContent=lv==='ALL'?'All Levels':lv;
-    b.onclick=()=>{lbLevel=lv;document.querySelectorAll('#lb-tabs .level-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');loadLB();};
+    b.onclick=()=>{ lbLevel=lv; document.querySelectorAll('#lb-tabs .level-tab').forEach(x=>x.classList.remove('active')); b.classList.add('active'); loadLB(); };
     tabs.appendChild(b);
   });
 }
-function loadLB(){
-  const all=loadAttempts();
+
+async function loadLB(){
+  const all=await loadAttempts();
   const filtered=lbLevel==='ALL'?all:all.filter(a=>a.level===lbLevel);
   const best={};
-  filtered.forEach(a=>{const k=a.userId+'_'+a.passageId;if(!best[k]||a.score>best[k].score)best[k]=a;});
+  filtered.forEach(a=>{ const k=a.userId+'_'+a.passageId; if(!best[k]||a.score>best[k].score) best[k]=a; });
   const sorted=Object.values(best).sort((a,b)=>b.score-a.score);
   const tbody=document.getElementById('lb-body');
-  if(!sorted.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-secondary);">No scores yet — be the first to type!</td></tr>';return;}
+  if(!sorted.length){ tbody.innerHTML='<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-secondary)">No scores yet — be the first to type!</td></tr>'; return; }
   tbody.innerHTML=sorted.slice(0,30).map((a,i)=>{
     const rc=i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'rank-other';
     const me=a.userId===CU.id;
-    return`<tr class="${me?'me':''}"><td><span class="rank-badge ${rc}">${i+1}</span></td><td>${a.userName} <span style="font-size:0.8rem;color:var(--text-secondary);">${a.userZh}</span>${me?' <span style="font-size:0.68rem;background:#e6f1fb;color:#185fa5;padding:2px 6px;border-radius:8px;font-weight:700;">You</span>':''}</td><td><span class="badge-level badge-${a.level}">${a.level}</span></td><td style="font-size:0.8rem;">${a.passageLabel}</td><td>${a.accuracy}%</td><td>${a.cpm} c/m</td><td style="font-weight:700;color:#185fa5;">${a.score}</td></tr>`;
+    return`<tr class="${me?'me':''}"><td><span class="rank-badge ${rc}">${i+1}</span></td><td>${a.userName} <span style="font-size:0.8rem;color:var(--text-secondary)">${a.userZh}</span>${me?' <span style="font-size:0.68rem;background:#e6f1fb;color:#185fa5;padding:2px 6px;border-radius:8px;font-weight:700">You</span>':''}</td><td><span class="badge-level badge-${a.level}">${a.level}</span></td><td style="font-size:0.8rem">${a.passageLabel}</td><td>${a.accuracy}%</td><td>${a.cpm} c/m</td><td style="font-weight:700;color:#185fa5">${a.score}</td></tr>`;
   }).join('');
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════════════════════
 // HISTORY
-// ════════════════════════════════════════════════
-function loadHistory(){
-  const mine=loadAttempts().filter(a=>a.userId===CU.id).sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));
+// ═══════════════════════════════════════
+async function loadHistory(){
+  const mine=(await loadAttempts()).filter(a=>a.userId===CU.id).sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));
   const list=document.getElementById('history-list');
-  if(!mine.length){list.innerHTML='<div class="empty-state"><i class="ti ti-history"></i>No attempts yet. Start typing!</div>';return;}
+  if(!mine.length){ list.innerHTML='<div class="empty-state"><i class="ti ti-history"></i>No attempts yet. Start typing!</div>'; return; }
   list.innerHTML=mine.map(a=>{
     const d=new Date(a.timestamp);
     const ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-    return`<div class="history-item"><div><div style="font-size:0.9rem;font-weight:600;">${a.level} · ${a.passageLabel}</div><div class="history-meta">${ds} · ${fmt(a.seconds)}</div></div><div class="history-scores"><div class="history-score-block"><div class="history-score-label">Accuracy</div><div class="history-score-val">${a.accuracy}%</div></div><div class="history-score-block"><div class="history-score-label">Speed</div><div class="history-score-val">${a.cpm} c/m</div></div><div class="history-score-block"><div class="history-score-label">Score</div><div class="history-score-val" style="color:#185fa5;font-size:1.05rem;">${a.score}</div></div></div></div>`;
+    return`<div class="history-item"><div><div style="font-size:0.9rem;font-weight:600">${a.level} · ${a.passageLabel}</div><div class="history-meta">${ds} · ${fmt(a.seconds)}</div></div><div class="history-scores"><div class="history-score-block"><div class="history-score-label">Accuracy</div><div class="history-score-val">${a.accuracy}%</div></div><div class="history-score-block"><div class="history-score-label">Speed</div><div class="history-score-val">${a.cpm} c/m</div></div><div class="history-score-block"><div class="history-score-label">Score</div><div class="history-score-val" style="color:#185fa5;font-size:1.05rem">${a.score}</div></div></div></div>`;
   }).join('');
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════════════════════
 // REPORT
-// ════════════════════════════════════════════════
-function loadReport(){
-  const mine=loadAttempts().filter(a=>a.userId===CU.id);
+// ═══════════════════════════════════════
+async function loadReport(){
+  const mine=(await loadAttempts()).filter(a=>a.userId===CU.id);
   const cont=document.getElementById('report-content');
-  if(!mine.length){cont.innerHTML='<div class="card"><div class="empty-state"><i class="ti ti-chart-bar"></i>Complete at least one attempt to see your report.</div></div>';return;}
+  if(!mine.length){ cont.innerHTML='<div class="card"><div class="empty-state"><i class="ti ti-chart-bar"></i>Complete at least one attempt to see your report.</div></div>'; return; }
   const avgAcc=Math.round(mine.reduce((s,a)=>s+a.accuracy,0)/mine.length);
   const avgCpm=Math.round(mine.reduce((s,a)=>s+a.cpm,0)/mine.length);
   const bestScore=Math.max(...mine.map(a=>a.score));
   const bestAcc=Math.max(...mine.map(a=>a.accuracy));
-  const byP={};mine.forEach(a=>{if(!byP[a.passageId])byP[a.passageId]=[];byP[a.passageId].push(a);});
-  const allLevel=loadAttempts().filter(a=>a.level===CU.level);
+  const byP={};
+  mine.forEach(a=>{ if(!byP[a.passageId]) byP[a.passageId]=[]; byP[a.passageId].push(a); });
+  const allLevel=(await loadAttempts()).filter(a=>a.level===CU.level);
   const betterThan=allLevel.length?Math.round(allLevel.filter(a=>bestScore>a.score).length/allLevel.length*100):0;
   const tipAcc=avgAcc<80?'Focus on accuracy first — slow down and check each character before moving on. Accuracy affects your score more than speed.':avgAcc<90?'Good accuracy! Try to maintain above 85% while gradually increasing your speed.':'Excellent accuracy! You can now push your speed — challenge yourself to type faster without dropping below 90%.';
-  const tipSpd=avgCpm<30?'Practice your Zhuyin or Pinyin input daily. Even 10 minutes of focused practice will noticeably improve your speed within a week.':avgCpm<60?'Solid speed! Build muscle memory by repeatedly typing common words and phrases from your level passages.':'Impressive speed! Try the harder passages and aim to hold this speed while keeping accuracy above 90%.';
+  const tipSpd=avgCpm<30?'Practice your Zhuyin or Pinyin input daily. Even 10 minutes of focused daily practice will noticeably improve your speed within a week.':avgCpm<60?'Solid speed! Build muscle memory by repeatedly typing common words and phrases from your level passages.':'Impressive speed! Try the harder passages and aim to hold this speed while keeping accuracy above 90%.';
   const encourage=bestAcc>=90?`你真的非常厲害，${CU.zh}！Your Chinese typing skills are genuinely impressive. Keep up this excellent standard — 繼續保持！`:`${CU.zh}，每一次練習都讓你更進步！Every single attempt is making you better. Don't stop now — the improvement will surprise you. 加油！`;
   cont.innerHTML=`
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-label">Attempts</div><div class="stat-value">${mine.length}</div></div>
-      <div class="stat-card"><div class="stat-label">Avg Accuracy</div><div class="stat-value">${avgAcc}<span class="stat-unit">%</span></div></div>
-      <div class="stat-card"><div class="stat-label">Avg Speed</div><div class="stat-value">${avgCpm}<span class="stat-unit"> c/m</span></div></div>
-      <div class="stat-card"><div class="stat-label">Best Score</div><div class="stat-value" style="color:#185fa5;">${bestScore}</div></div>
-    </div>
+    <div class="stats-grid"><div class="stat-card"><div class="stat-label">Attempts</div><div class="stat-value">${mine.length}</div></div><div class="stat-card"><div class="stat-label">Avg Accuracy</div><div class="stat-value">${avgAcc}<span class="stat-unit">%</span></div></div><div class="stat-card"><div class="stat-label">Avg Speed</div><div class="stat-value">${avgCpm}<span class="stat-unit"> c/m</span></div></div><div class="stat-card"><div class="stat-label">Best Score</div><div class="stat-value" style="color:#185fa5">${bestScore}</div></div></div>
     <div class="two-col">
-      <div class="card">
-        <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.9rem;">📊 Performance</div>
-        <div class="progress-row"><div class="progress-label">Accuracy</div><div class="progress-bg"><div class="progress-fill" style="width:${avgAcc}%;background:#185fa5;"></div></div><div class="progress-val">${avgAcc}%</div></div>
-        <div class="progress-row"><div class="progress-label">Speed</div><div class="progress-bg"><div class="progress-fill" style="width:${Math.min(100,avgCpm)};background:#0f6e56;"></div></div><div class="progress-val">${avgCpm}</div></div>
-        <div style="margin-top:0.75rem;font-size:0.82rem;color:var(--text-secondary);">Better than ${betterThan}% of ${CU.level} attempts · ${mine.length} total attempt${mine.length>1?'s':''}</div>
-      </div>
-      <div class="card">
-        <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.9rem;">🎯 By Passage</div>
-        ${Object.entries(byP).map(([pid,arr])=>{const bs=Math.max(...arr.map(a=>a.score));const ba=Math.max(...arr.map(a=>a.accuracy));return`<div style="margin-bottom:0.65rem;padding-bottom:0.65rem;border-bottom:var(--border);"><div style="display:flex;justify-content:space-between;"><span style="font-size:0.85rem;font-weight:600;">${pid}</span><span style="font-size:0.75rem;background:#e6f1fb;color:#185fa5;padding:2px 8px;border-radius:8px;font-weight:700;">Best: ${bs}</span></div><div style="font-size:0.75rem;color:var(--text-secondary);margin-top:2px;">${arr.length} attempt${arr.length>1?'s':''} · Best accuracy: ${ba}%</div></div>`;}).join('')}
-      </div>
+      <div class="card"><div style="font-weight:700;font-size:0.95rem;margin-bottom:0.9rem">📊 Performance</div><div class="progress-row"><div class="progress-label">Accuracy</div><div class="progress-bg"><div class="progress-fill" style="width:${avgAcc}%;background:#185fa5"></div></div><div class="progress-val">${avgAcc}%</div></div><div class="progress-row"><div class="progress-label">Speed</div><div class="progress-bg"><div class="progress-fill" style="width:${Math.min(100,avgCpm)}%;background:#0f6e56"></div></div><div class="progress-val">${avgCpm}</div></div><div style="margin-top:0.75rem;font-size:0.82rem;color:var(--text-secondary)">Better than ${betterThan}% of ${CU.level} attempts · ${mine.length} total</div></div>
+      <div class="card"><div style="font-weight:700;font-size:0.95rem;margin-bottom:0.9rem">🎯 By Passage</div>${Object.entries(byP).map(([pid,arr])=>{ const bs=Math.max(...arr.map(a=>a.score)); const ba=Math.max(...arr.map(a=>a.accuracy)); return`<div style="margin-bottom:0.65rem;padding-bottom:0.65rem;border-bottom:var(--border)"><div style="display:flex;justify-content:space-between"><span style="font-size:0.85rem;font-weight:600">${pid}</span><span style="font-size:0.75rem;background:#e6f1fb;color:#185fa5;padding:2px 8px;border-radius:8px;font-weight:700">Best: ${bs}</span></div><div style="font-size:0.75rem;color:var(--text-secondary);margin-top:2px">${arr.length} attempt${arr.length>1?'s':''} · Best accuracy: ${ba}%</div></div>`; }).join('')}</div>
     </div>
-    <div class="card" style="margin-top:1rem;">
-      <div style="font-weight:700;font-size:0.95rem;margin-bottom:0.9rem;">💡 Personalized Tips for ${CU.name}</div>
-      <div class="report-tip tip-sky"><strong style="color:#185fa5;">Accuracy: </strong>${tipAcc}</div>
-      <div class="report-tip tip-jade"><strong style="color:#0f6e56;">Speed: </strong>${tipSpd}</div>
-      <div class="report-tip tip-gold"><strong style="color:#7a5c00;">Encouragement: </strong>${encourage}</div>
-    </div>`;
+    <div class="card" style="margin-top:1rem"><div style="font-weight:700;font-size:0.95rem;margin-bottom:0.9rem">💡 Personalized Tips for ${CU.name}</div><div class="report-tip tip-sky"><strong style="color:#185fa5">Accuracy: </strong>${tipAcc}</div><div class="report-tip tip-jade"><strong style="color:#0f6e56">Speed: </strong>${tipSpd}</div><div class="report-tip tip-gold"><strong style="color:#7a5c00">Encouragement: </strong>${encourage}</div></div>`;
 }
 
-// ════════════════════════════════════════════════
+// ═══════════════════════════════════════
 // ADMIN
-// ════════════════════════════════════════════════
+// ═══════════════════════════════════════
 function buildAdminTabs(){
-  const tabs=document.getElementById('admin-tabs');tabs.innerHTML='';
+  const tabs=document.getElementById('admin-tabs'); tabs.innerHTML='';
   ['ALL','L9','L6','L5'].forEach(lv=>{
-    const b=document.createElement('button');b.className='level-tab'+(lv==='ALL'?' active':'');
+    const b=document.createElement('button'); b.className='level-tab'+(lv==='ALL'?' active':'');
     b.textContent=lv==='ALL'?'All Levels':lv;
-    b.onclick=()=>{adminLevel=lv;document.querySelectorAll('#admin-tabs .level-tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');loadAdmin();};
+    b.onclick=()=>{ adminLevel=lv; document.querySelectorAll('#admin-tabs .level-tab').forEach(x=>x.classList.remove('active')); b.classList.add('active'); loadAdmin(); };
     tabs.appendChild(b);
   });
 }
-function loadAdmin(){
-  if(!CU||!CU.isAdmin)return;
-  const all=loadAttempts();
+
+async function loadAdmin(){
+  if(!CU||!CU.isAdmin) return;
+  const all=await loadAttempts();
   const filtered=adminLevel==='ALL'?all:all.filter(a=>a.level===adminLevel);
-  const lvCounts={L9:0,L6:0,L5:0};all.forEach(a=>{if(lvCounts[a.level]!==undefined)lvCounts[a.level]++;});
+  const lvC={L9:0,L6:0,L5:0};
+  all.forEach(a=>{ if(lvC[a.level]!==undefined) lvC[a.level]++; });
   const participants=new Set(all.map(a=>a.userId)).size;
   const avgScore=all.length?Math.round(all.reduce((s,a)=>s+a.score,0)/all.length):0;
-  document.getElementById('admin-stats').innerHTML=`<div class="stat-card"><div class="stat-label">Total Attempts</div><div class="stat-value">${all.length}</div></div><div class="stat-card"><div class="stat-label">Participants</div><div class="stat-value">${participants}</div></div><div class="stat-card"><div class="stat-label">Avg Score</div><div class="stat-value">${avgScore}</div></div><div class="stat-card"><div class="stat-label">L9 Attempts</div><div class="stat-value">${lvCounts.L9}</div></div><div class="stat-card"><div class="stat-label">L6 Attempts</div><div class="stat-value">${lvCounts.L6}</div></div><div class="stat-card"><div class="stat-label">L5 Attempts</div><div class="stat-value">${lvCounts.L5}</div></div>`;
+  document.getElementById('admin-stats').innerHTML=`<div class="stat-card"><div class="stat-label">Total Attempts</div><div class="stat-value">${all.length}</div></div><div class="stat-card"><div class="stat-label">Participants</div><div class="stat-value">${participants}</div></div><div class="stat-card"><div class="stat-label">Avg Score</div><div class="stat-value">${avgScore}</div></div><div class="stat-card"><div class="stat-label">L9 Attempts</div><div class="stat-value">${lvC.L9}</div></div><div class="stat-card"><div class="stat-label">L6 Attempts</div><div class="stat-value">${lvC.L6}</div></div><div class="stat-card"><div class="stat-label">L5 Attempts</div><div class="stat-value">${lvC.L5}</div></div>`;
   const byUser={};
-  filtered.forEach(a=>{if(!byUser[a.userId])byUser[a.userId]={name:a.userName,zh:a.userZh,level:a.level,attempts:[],userId:a.userId};byUser[a.userId].attempts.push(a);});
+  filtered.forEach(a=>{ if(!byUser[a.userId]) byUser[a.userId]={name:a.userName,zh:a.userZh,level:a.level,attempts:[]}; byUser[a.userId].attempts.push(a); });
   const rows=Object.values(byUser).sort((a,b)=>Math.max(...b.attempts.map(x=>x.score))-Math.max(...a.attempts.map(x=>x.score)));
   const tbody=document.getElementById('admin-body');
-  if(!rows.length){tbody.innerHTML='<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--text-secondary);">No data yet.</td></tr>';return;}
-  tbody.innerHTML=rows.map((u,i)=>{
+  if(!rows.length){ tbody.innerHTML='<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--text-secondary)">No data yet.</td></tr>'; return; }
+  const key=rows.findIndex(r=>r.name==='Administrator');
+  tbody.innerHTML=rows.filter(u=>u.name!=='Administrator').map((u,i)=>{
     const bs=Math.max(...u.attempts.map(a=>a.score));
     const ba=Math.max(...u.attempts.map(a=>a.accuracy));
     const bc=Math.max(...u.attempts.map(a=>a.cpm));
-    return`<tr><td>${i+1}</td><td style="font-size:0.75rem;font-family:'Courier New',monospace;color:var(--text-secondary);">${u.userId}</td><td>${u.name} <span style="color:var(--text-secondary);">${u.zh}</span></td><td><span class="badge-level badge-${u.level}">${u.level}</span></td><td>${u.attempts.length}</td><td style="font-weight:700;color:#185fa5;">${bs}</td><td>${ba}%</td><td>${bc} c/m</td></tr>`;
+    return`<tr><td>${i+1}</td><td style="font-size:0.75rem;font-family:'Courier New',monospace;color:var(--text-secondary)">${u.attempts[0]?.userId||''}</td><td>${u.name} <span style="color:var(--text-secondary)">${u.zh}</span></td><td><span class="badge-level badge-${u.level}">${u.level}</span></td><td>${u.attempts.length}</td><td style="font-weight:700;color:#185fa5">${bs}</td><td>${ba}%</td><td>${bc} c/m</td></tr>`;
   }).join('');
 }
 
-function exportCSV(){
-  const all=loadAttempts();
-  if(!all.length){showToast('No data to export.','error');return;}
+async function exportCSV(){
+  const all=await loadAttempts();
+  if(!all.length){ showToast('No data to export.','error'); return; }
   const header='LoginID,Name,ChineseName,Level,PassageID,PassageLabel,Accuracy,Speed_cpm,Score,Seconds,Timestamp';
   const rows=all.map(a=>[a.userId,a.userName,a.userZh,a.level,a.passageId,a.passageLabel,a.accuracy,a.cpm,a.score,a.seconds,a.timestamp].join(','));
   const csv=[header,...rows].join('\n');
   const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
   const url=URL.createObjectURL(blob);
-  const link=document.createElement('a');link.href=url;link.download='MHCS_Typing_Contest_2026_Scores.csv';link.click();
+  const link=document.createElement('a'); link.href=url; link.download='MHCS_Typing_Contest_2026_Scores.csv'; link.click();
   showToast('CSV exported successfully!','success');
 }
 </script>
