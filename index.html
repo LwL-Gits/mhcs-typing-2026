@@ -490,9 +490,9 @@ const LS_KEY_API  = 'mhcs_jb_apikey';
 const LS_KEY_BIN  = 'mhcs_jb_binid';
 const LS_FALLBACK = 'mhcs_typing_2026_local';
 const JB_BASE     = 'https://api.jsonbin.io/v3';
-$2a$10$kctd8EeDs5fYr9EfoRdOUuBMnIBXeInoPxQEPIr.PmFR8RNC9/8La
-let JB_KEY = '$2a$10$FFKR6Vgj6ZIT3yv4C/df2OdrKyOnmwyawoCauMWLtyA6UrtHaOWvq';
-let JB_BIN = '6a04ebfdadc21f119a976aca' ;
+
+let JB_KEY = '$2a$10$G211AOBVaDRgmm63UzGthOBZfVxGJzPhrS4g72kG2ja/Am7W5gxJS';
+let JB_BIN = '6a04ebfdadc21f119a976aca';
 let syncInFlight = false;
 let pendingQueue = []; // attempts queued while offline
 
@@ -622,15 +622,9 @@ async function initializeStorage(){
 // STARTUP — check creds
 // ═══════════════════════════════════════
 window.addEventListener('DOMContentLoaded', ()=>{
-  if(JB_KEY && JB_BIN){
-    // Creds already saved — go straight to login
-    document.getElementById('setup-screen').style.display='none';
-    document.getElementById('login-screen').style.display='flex';
-  } else {
-    // Show setup wizard
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('setup-screen').style.display='flex';
-  }
+  // Credentials hardcoded — go straight to login
+  document.getElementById('setup-screen').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
 });
 
 // ═══════════════════════════════════════
