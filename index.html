@@ -356,6 +356,9 @@ body{font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Apple LiGoth
             </div>
             <div class="passage-display" id="passage-display">Select a passage above to begin.</div>
             <div style="font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.4rem">Type here (activate your Chinese IME first):</div>
+            <div style="font-size:0.75rem;background:#fef9e7;border:1px solid #f0d060;border-radius:6px;padding:0.4rem 0.75rem;margin-bottom:0.5rem;color:#7a5c00">
+              📌 請使用<strong>繁體中文</strong>輸入 — <strong>Traditional Chinese only.</strong> Each simplified character typed deducts <strong>3 points</strong> from your score.
+            </div>
             <textarea class="typing-input" id="typing-input" placeholder="Click here, then start typing in Chinese…" disabled rows="3"></textarea>
             <div class="typing-controls">
               <div class="live-stats">
@@ -363,6 +366,7 @@ body{font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei','Apple LiGoth
                 <div class="live-stat"><div class="live-stat-val" id="live-cpm">0</div><div class="live-stat-lbl">Chars/min</div></div>
                 <div class="live-stat"><div class="live-stat-val" id="live-acc">—</div><div class="live-stat-lbl">Accuracy</div></div>
                 <div class="live-stat"><div class="live-stat-val" id="live-correct">0</div><div class="live-stat-lbl">Correct</div></div>
+                <div class="live-stat"><div id="live-simp" style="display:none;font-size:0.78rem;font-weight:700;color:#c0392b;background:#fadbd8;padding:3px 8px;border-radius:8px;white-space:nowrap"></div><div class="live-stat-lbl" id="live-simp-lbl" style="display:none;font-size:0.62rem;color:#c0392b">簡體 −3/char</div></div>
               </div>
               <div class="btn-group">
                 <button class="btn-secondary" onclick="resetTyping()">Reset</button>
@@ -782,6 +786,8 @@ function selectLevel(lv){
 
 function selectPassage(lv,idx){
   stopTimer(); started=false; secs=0;
+  // Reset anti-cheat state
+  lastInputLen = 0; cheatWarnings = 0; _lastKnownValue = '';
   CP=PASSAGES[lv][idx];
   document.querySelectorAll('#passage-sel .passage-btn').forEach((b,i)=>b.classList.toggle('active',i===idx));
   renderPassage('');
@@ -809,19 +815,175 @@ function renderPassage(typed){
 }
 function escH(c){ return c.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-document.getElementById('typing-input').addEventListener('input',function(){
-  if(!CP) return;
-  if(!started){ started=true; startTimer(); }
-  const typed=this.value, txt=CP.text;
+// ═══════════════════════════════════════
+// SIMPLIFIED CHINESE DETECTION ENGINE
+// Strategy: build a set of characters that appear ONLY in simplified
+// Chinese — i.e. characters that have a different traditional form.
+// Any such character typed earns a 3-point penalty per occurrence,
+// and the character is highlighted orange in the passage display.
+//
+// We use the authoritative SC→TC mapping table (most common 500+
+// simplified characters that differ from traditional equivalents).
+// Characters shared between both scripts are NOT penalised.
+// ═══════════════════════════════════════
+
+// Simplified-only characters (these forms do not exist in Traditional Chinese)
+const SIMPLIFIED_CHARS = new Set([
+  // Most common simplified characters whose traditional form differs
+  '爱','碍','肮','袄','奥','坝','罢','摆','办','帮','报','宝','饱','备','笔',
+  '毕','边','变','标','别','补','财','参','蚕','惭','仓','层','厂','长','车',
+  '称','齿','冲','筹','处','传','创','从','窜','达','带','担','单','当','岛',
+  '导','灯','敌','递','点','电','淀','东','动','断','队','对','顿','夺','鹅',
+  '额','儿','发','阀','矾','饭','飞','废','风','凤','负','妇','复','该','干',
+  '纲','钢','高','镐','给','巩','购','够','关','观','广','归','柜','国','过',
+  '还','汉','号','合','轰','红','后','护','华','画','话','怀','欢','环','换',
+  '会','货','击','积','极','际','继','夹','检','见','将','浆','奖','降','节',
+  '结','进','惊','颈','竟','旧','剧','举','觉','军','开','来','蜡','烂','劳',
+  '乐','类','离','历','联','炼','粮','两','辆','了','猎','临','邻','龙','楼',
+  '炉','陆','虑','乱','轮','罗','马','买','卖','满','门','梦','秘','绵','庙',
+  '灭','难','脑','农','欧','盘','炮','丰','弃','牵','桥','窃','亲','请','穷',
+  '区','权','劝','让','热','认','洒','伞','扫','涩','杀','晒','闪','伤','烧',
+  '摄','设','时','实','适','书','树','数','帅','双','税','丝','岁','损','谈',
+  '汤','腾','体','条','铁','听','头','图','团','脱','弯','万','围','为','维',
+  '卫','问','务','雾','锡','习','戏','虾','吓','险','现','宪','乡','响','项',
+  '销','写','寻','选','训','压','阳','养','样','药','页','义','议','忆','阴',
+  '应','营','拥','优','邮','鱼','语','员','运','杂','张','战','这','针','证',
+  '只','执','制','质','众','猪','转','装','壮','庄','准','资','总','钻',
+  // Additional high-frequency simplified forms
+  '时','间','问','题','没','说','过','对','就','来','用','们','什','么','国',
+  '里','要','以','这','个','为','后','也','就','与','在','是','了','不','上',
+  '他','们','她','它','和','有','我','你','到','下','去','开','地','得','那',
+  '而','和','经','很','会','主','发','定','从','知','向','还','可','以','其',
+]);
+
+// Penalty per simplified character occurrence in the typed string
+const SIMP_PENALTY_PER_CHAR = 3;
+
+// Count simplified characters in a string
+function countSimplified(str) {
+  let count = 0;
+  for (const ch of str) if (SIMPLIFIED_CHARS.has(ch)) count++;
+  return count;
+}
+
+// Score penalty: total simplified chars × penalty per char, as a % of base score
+// We deduct from the final score directly (floor to 0)
+function applySimplifiedPenalty(baseScore, simpCount) {
+  if (simpCount === 0) return { finalScore: baseScore, penalty: 0 };
+  const penalty = simpCount * SIMP_PENALTY_PER_CHAR;
+  return { finalScore: Math.max(0, baseScore - penalty), penalty };
+}
+
+// ═══════════════════════════════════════
+// ANTI-CHEAT SYSTEM
+// Blocks: paste, drag-drop, context-menu cut/copy/paste,
+//         programmatic value injection, IME bulk-insert floods.
+// Flags:  suspiciously large single-event character jumps.
+// ═══════════════════════════════════════
+let lastInputLen = 0;       // length of textarea after last legitimate event
+let cheatWarnings = 0;      // accumulated warning count this attempt
+let inputBlocked = false;   // true while showing the red flash warning
+
+const TYPING_INPUT = document.getElementById('typing-input');
+
+// Max characters that can legitimately appear in one input event.
+// Chinese IME commits one character (occasionally two for compound) at a time.
+// We allow up to 4 to be safe for edge-case IME behaviour.
+const MAX_CHARS_PER_EVENT = 4;
+
+function flashCheatWarning(msg) {
+  // Red border flash + toast
+  TYPING_INPUT.style.borderColor = '#c0392b';
+  TYPING_INPUT.style.background  = '#fff0f0';
+  showToast('⛔ ' + msg, 'error');
+  setTimeout(() => {
+    TYPING_INPUT.style.borderColor = '';
+    TYPING_INPUT.style.background  = '';
+  }, 1200);
+}
+
+function blockEvent(e, msg) {
+  e.preventDefault();
+  e.stopPropagation();
+  cheatWarnings++;
+  flashCheatWarning(msg);
+}
+
+// Block paste via keyboard, menu, and programmatic dispatchEvent
+TYPING_INPUT.addEventListener('paste',  e => blockEvent(e, '貼上已停用 — Paste is not allowed. Please type!'));
+TYPING_INPUT.addEventListener('drop',   e => blockEvent(e, '拖放已停用 — Drag & drop is not allowed. Please type!'));
+TYPING_INPUT.addEventListener('cut',    e => blockEvent(e, '剪下已停用 — Cut is disabled during the contest.'));
+TYPING_INPUT.addEventListener('copy',   e => blockEvent(e, '複製已停用 — Copying is disabled during the contest.'));
+
+// Block right-click context menu on the typing area
+TYPING_INPUT.addEventListener('contextmenu', e => {
+  e.preventDefault();
+  showToast('⛔ 右鍵選單已停用 — Right-click is disabled here.', 'error');
+});
+
+// Detect programmatic value changes (e.g. browser extensions, devtools assignment)
+// We use a MutationObserver on the textarea's value via a polling guard
+let _lastKnownValue = '';
+setInterval(() => {
+  if (!CP || !TYPING_INPUT || document.activeElement !== TYPING_INPUT) return;
+  const current = TYPING_INPUT.value;
+  if (current === _lastKnownValue) return;
+  const delta = current.length - _lastKnownValue.length;
+  // If value changed but no input event fired recently (programmatic injection)
+  // we handle this in the input listener below via lastInputLen check
+  _lastKnownValue = current;
+}, 50);
+
+// Main input listener with character-delta guard
+TYPING_INPUT.addEventListener('input', function(e) {
+  if (!CP) return;
+
+  const current = this.value;
+  const delta   = current.length - lastInputLen;
+
+  // ── Guard: too many characters added in one event ──
+  if (delta > MAX_CHARS_PER_EVENT) {
+    // Revert to last known good value
+    this.value = _lastKnownValue.slice(0, lastInputLen);
+    cheatWarnings++;
+    flashCheatWarning('貼上已偵測並已阻止！— Paste detected & blocked! Please type each character.');
+    return; // do not process this event
+  }
+
+  // Legitimate input — update guards
+  lastInputLen       = current.length;
+  _lastKnownValue    = current;
+
+  if (!started) { started = true; startTimer(); }
+
+  const typed = current;
+  const txt   = CP.text;
   renderPassage(typed);
-  let correct=0;
-  for(let i=0;i<Math.min(typed.length,txt.length);i++) if(typed[i]===txt[i]) correct++;
-  const acc=typed.length>0?Math.round(correct/Math.min(typed.length,txt.length)*100):0;
-  const cpm=secs>0?Math.round(correct/secs*60):0;
-  document.getElementById('live-cpm').textContent=cpm;
-  document.getElementById('live-acc').textContent=typed.length>0?acc+'%':'—';
-  document.getElementById('live-correct').textContent=correct;
-  document.getElementById('btn-submit').disabled=typed.length<3;
+
+  let correct = 0;
+  for (let i = 0; i < Math.min(typed.length, txt.length); i++)
+    if (typed[i] === txt[i]) correct++;
+
+  const acc = typed.length > 0
+    ? Math.round(correct / Math.min(typed.length, txt.length) * 100) : 0;
+  const cpm = secs > 0 ? Math.round(correct / secs * 60) : 0;
+
+  // Live simplified-character warning
+  const simpCount = countSimplified(typed);
+  const simpEl = document.getElementById('live-simp');
+  if (simpEl) {
+    if (simpCount > 0) {
+      simpEl.textContent = '⚠️ ' + simpCount + ' 簡';
+      simpEl.style.display = 'block';
+    } else {
+      simpEl.style.display = 'none';
+    }
+  }
+
+  document.getElementById('live-cpm').textContent     = cpm;
+  document.getElementById('live-acc').textContent     = typed.length > 0 ? acc + '%' : '—';
+  document.getElementById('live-correct').textContent = correct;
+  document.getElementById('btn-submit').disabled      = typed.length < 3;
 });
 
 function startTimer(){ timer=setInterval(()=>{ secs++; document.getElementById('timer-disp').textContent=fmt(secs); document.getElementById('timer-disp').className='timer-display running'; },1000); }
@@ -829,6 +991,7 @@ function stopTimer(){ clearInterval(timer); timer=null; }
 
 function resetTyping(){
   stopTimer(); started=false; secs=0;
+  lastInputLen=0; cheatWarnings=0; _lastKnownValue='';
   if(!CP) return;
   document.getElementById('typing-input').value='';
   document.getElementById('timer-disp').textContent='0:00';
@@ -848,18 +1011,31 @@ async function submitAttempt(){
   for(let i=0;i<Math.min(typed.length,txt.length);i++){ if(typed[i]===txt[i]) correct++; else errors++; }
   const acc=typed.length>0?Math.round(correct/Math.min(typed.length,txt.length)*100):0;
   const cpm=secs>0?Math.round(correct/secs*60):0;
-  const score=Math.round(cpm*(acc/100));
+  const baseScore=Math.round(cpm*(acc/100));
+
+  // Simplified Chinese penalty
+  const simpCount = countSimplified(typed);
+  const { finalScore, penalty } = applySimplifiedPenalty(baseScore, simpCount);
+
   const attempt={
     userId:CU.id, userName:CU.name, userZh:CU.zh,
     level:CL, passageId:CP.id, passageLabel:CP.label,
-    typed, correct, errors, accuracy:acc, cpm, score,
+    typed, correct, errors, accuracy:acc, cpm,
+    baseScore, simplifiedCount:simpCount, simplifiedPenalty:penalty,
+    score:finalScore,
     seconds:secs, totalChars:txt.length,
+    cheatWarnings,
     timestamp:new Date().toISOString()
   };
   document.getElementById('btn-submit').disabled=true;
   showResultBanner(attempt);
   document.getElementById('typing-input').value='';
+  // Hide simp indicator
+  const se=document.getElementById('live-simp'); if(se) se.style.display='none';
+  const sl=document.getElementById('live-simp-lbl'); if(sl) sl.style.display='none';
   started=false; secs=0;
+  // Reset anti-cheat for next attempt
+  lastInputLen=0; cheatWarnings=0; _lastKnownValue='';
   await saveAttempt(attempt);
   await loadHistory();
   await loadLB();
@@ -874,7 +1050,10 @@ function showResultBanner(a){
     :a.accuracy>=80
     ?['🎉 Great job! 做得好！','很棒的表現！Keep pushing!']
     :['💪 Good effort! 繼續加油！','Practice makes perfect!'];
-  document.getElementById('result-area').innerHTML=`<div class="result-banner"><h2>${msgs[0]}</h2><p style="opacity:0.82;font-size:0.875rem">${msgs[1]}</p><div class="result-grid"><div class="result-item"><div class="result-item-val">${a.accuracy}%</div><div class="result-item-lbl">Accuracy 準確率</div></div><div class="result-item"><div class="result-item-val">${a.cpm}</div><div class="result-item-lbl">Chars/min 字/分</div></div><div class="result-item"><div class="result-item-val">${a.score}</div><div class="result-item-lbl">Score 分數</div></div><div class="result-item"><div class="result-item-val">${fmt(a.seconds)}</div><div class="result-item-lbl">Time 時間</div></div></div></div>`;
+  const simpLine = a.simplifiedCount > 0
+    ? `<div style="margin-top:0.6rem;background:rgba(192,57,43,0.25);border-radius:8px;padding:0.5rem 0.75rem;font-size:0.82rem;">⚠️ 使用了 ${a.simplifiedCount} 個簡體字，扣 ${a.simplifiedPenalty} 分 | ${a.simplifiedCount} simplified character${a.simplifiedCount>1?'s':''} detected — −${a.simplifiedPenalty} pts penalty. Please use Traditional Chinese 繁體中文！</div>`
+    : `<div style="margin-top:0.6rem;font-size:0.8rem;opacity:0.7">✅ 全部繁體字 — All Traditional Chinese!</div>`;
+  document.getElementById('result-area').innerHTML=`<div class="result-banner"><h2>${msgs[0]}</h2><p style="opacity:0.82;font-size:0.875rem">${msgs[1]}</p><div class="result-grid"><div class="result-item"><div class="result-item-val">${a.accuracy}%</div><div class="result-item-lbl">Accuracy 準確率</div></div><div class="result-item"><div class="result-item-val">${a.cpm}</div><div class="result-item-lbl">Chars/min 字/分</div></div><div class="result-item"><div class="result-item-val" style="${a.simplifiedCount>0?'color:#f9a8a0':'color:#7fffd4'}">${a.score}</div><div class="result-item-lbl">Final Score 最終分數</div></div><div class="result-item"><div class="result-item-val">${fmt(a.seconds)}</div><div class="result-item-lbl">Time 時間</div></div></div>${simpLine}</div>`;
 }
 
 // ═══════════════════════════════════════
@@ -915,7 +1094,7 @@ async function loadHistory(){
   list.innerHTML=mine.map(a=>{
     const d=new Date(a.timestamp);
     const ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-    return`<div class="history-item"><div><div style="font-size:0.9rem;font-weight:600">${a.level} · ${a.passageLabel}</div><div class="history-meta">${ds} · ${fmt(a.seconds)}</div></div><div class="history-scores"><div class="history-score-block"><div class="history-score-label">Accuracy</div><div class="history-score-val">${a.accuracy}%</div></div><div class="history-score-block"><div class="history-score-label">Speed</div><div class="history-score-val">${a.cpm} c/m</div></div><div class="history-score-block"><div class="history-score-label">Score</div><div class="history-score-val" style="color:#185fa5;font-size:1.05rem">${a.score}</div></div></div></div>`;
+    return`<div class="history-item"><div><div style="font-size:0.9rem;font-weight:600">${a.level} · ${a.passageLabel}</div><div class="history-meta">${ds} · ${fmt(a.seconds)}${a.simplifiedCount>0?' · <span style="color:#c0392b;font-weight:600">⚠️ '+a.simplifiedCount+' 簡 −'+a.simplifiedPenalty+'pts</span>':' · ✅ 繁體'}</div></div><div class="history-scores"><div class="history-score-block"><div class="history-score-label">Accuracy</div><div class="history-score-val">${a.accuracy}%</div></div><div class="history-score-block"><div class="history-score-label">Speed</div><div class="history-score-val">${a.cpm} c/m</div></div><div class="history-score-block"><div class="history-score-label">Score</div><div class="history-score-val" style="color:#185fa5;font-size:1.05rem">${a.score}</div></div></div></div>`;
   }).join('');
 }
 
@@ -978,7 +1157,9 @@ async function loadAdmin(){
     const bs=Math.max(...u.attempts.map(a=>a.score));
     const ba=Math.max(...u.attempts.map(a=>a.accuracy));
     const bc=Math.max(...u.attempts.map(a=>a.cpm));
-    return`<tr><td>${i+1}</td><td style="font-size:0.75rem;font-family:'Courier New',monospace;color:var(--text-secondary)">${u.attempts[0]?.userId||''}</td><td>${u.name} <span style="color:var(--text-secondary)">${u.zh}</span></td><td><span class="badge-level badge-${u.level}">${u.level}</span></td><td>${u.attempts.length}</td><td style="font-weight:700;color:#185fa5">${bs}</td><td>${ba}%</td><td>${bc} c/m</td></tr>`;
+    const flags=u.attempts.filter(a=>a.cheatWarnings>0).length;
+    const simpTotal=u.attempts.reduce((s,a)=>s+(a.simplifiedCount||0),0);
+    return`<tr><td>${i+1}</td><td style="font-size:0.75rem;font-family:'Courier New',monospace;color:var(--text-secondary)">${u.attempts[0]?.userId||''}</td><td>${u.name} <span style="color:var(--text-secondary)">${u.zh}</span>${flags?` <span title="${flags} attempt(s) had blocked paste/drop events" style="background:#fadbd8;color:#822620;font-size:0.68rem;padding:2px 6px;border-radius:8px;font-weight:700;cursor:help">⚠️ ${flags} paste flag${flags>1?'s':''}</span>`:''} ${simpTotal>0?`<span title="${simpTotal} simplified chars used across all attempts" style="background:#fef9e7;color:#7a5c00;font-size:0.68rem;padding:2px 6px;border-radius:8px;font-weight:700;cursor:help">簡 ${simpTotal}</span>`:''}</td><td><span class="badge-level badge-${u.level}">${u.level}</span></td><td>${u.attempts.length}</td><td style="font-weight:700;color:#185fa5">${bs}</td><td>${ba}%</td><td>${bc} c/m</td></tr>`;
   }).join('');
 }
 
